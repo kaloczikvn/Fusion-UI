@@ -8,7 +8,6 @@ import TopMenu from '../components/TopMenu'
 import AnimatedBackground from '../components/AnimatedBackground'
 import TopLeftActions from '../components/TopLeftActions'
 import TopRightActions from '../components/TopRightActions'
-import FrameHell from '../components/FrameHell'
 import GameConsole from "../components/GameConsole"
 
 import QuitConfirmationPopup from '../popups/QuitConfirmationPopup'
@@ -49,7 +48,7 @@ class App extends Component
         this.preloader.add('/assets/fonts/JetBrainsMono-Bold.woff2');
         this.preloader.add('/assets/fonts/JetBrainsMono-Regular.woff2');
 
-        this.preloader.add('/assets/fonts/MaterialIcons-Regular.woff2');
+        this.preloader.add('/assets/fonts/MaterialIcons-Regular.ttf');
 
         this.preloader.add('/assets/img/background.png');
         this.preloader.add('/assets/img/logo.svg');
@@ -136,9 +135,11 @@ class App extends Component
                 <>
                     <AnimatedBackground />
                     <div id="app-container" className={this.props.base.hasBlur ? 'has-blur' : ''}>
-                        <TopLeftActions onQuit={this.onQuit.bind(this)} onLogoutQuit={this.onLogoutQuit.bind(this)} />
-                        {topMenu}
-                        <TopRightActions/>
+                        <div className="top-bar">
+                            <TopLeftActions onQuit={this.onQuit.bind(this)} onLogoutQuit={this.onLogoutQuit.bind(this)} />
+                            {topMenu}
+                            <TopRightActions/>
+                        </div>
                         {this.props.children}
                         <div id="build-info">
                             {this.props.base.build !== null ? 'Build #' + this.props.base.build : 'Unknown Build'}
@@ -174,7 +175,6 @@ class App extends Component
 
         return (
             <div id="ui-app">
-                <FrameHell/>
                 {mainContainers}
                 <GameConsole/>
                 {globalNotice}

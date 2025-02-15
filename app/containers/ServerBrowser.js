@@ -20,6 +20,10 @@ class ServerBrowser extends Component
         super(props);
 
         this.scrollbar = null;
+
+        this.browserRef = React.createRef();
+        this.headerRef = React.createRef();
+
         this.state = {
             expandedServer: null,
             filtersVisible: false,
@@ -144,9 +148,9 @@ class ServerBrowser extends Component
         const favoritesOnly = this.props.servers.favoriteServersOnly;
        
         return (
-            <div className="server-browser content-wrapper" ref="browser">
+            <div className="server-browser content-wrapper" ref={this.browserRef}>
                 <div className="server-list">
-                    <div className="list-header" ref="header">
+                    <div className="list-header" ref={this.headerRef}>
                         <div className="column column-1">
                             <div className="header-action" onClick={this.onFetchServers.bind(this)}>
                                 <span>{serverCountText}</span>
@@ -298,7 +302,8 @@ class ServerBrowser extends Component
 
         window.addEventListener('resize', this._onResize);
         window.addEventListener('click', this._onHandleClickOutsideOfFiltersBox);
-        this._onResize();
+
+        setTimeout(this._onResize, 0);
 
         // Fetch servers on page mount.
         this.onFetchServers();
@@ -312,11 +317,15 @@ class ServerBrowser extends Component
 
     _onResize = () =>
     {
-        const browserStyle = window.getComputedStyle(this.refs.browser);
-        const headerStyle = window.getComputedStyle(this.refs.header);
+        if (!this.browserRef.current || !this.headerRef.current) {
+            return;
+        }
 
-        let requiredHeight = this.refs.browser.clientHeight;
-        let requiredWidth = this.refs.header.clientWidth;
+        const browserStyle = window.getComputedStyle(this.browserRef.current);
+        const headerStyle = window.getComputedStyle(this.headerRef.current);
+
+        let requiredHeight = this.browserRef.current.clientHeight;
+        let requiredWidth = this.headerRef.current.clientWidth;
 
         requiredHeight -= parseFloat(browserStyle.paddingTop);
         requiredHeight -= parseFloat(browserStyle.paddingBottom);

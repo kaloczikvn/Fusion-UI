@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as LoginStatus from "../constants/LoginStatus";
 
+import ExitToAppIcon from './icons/ExitToAppIcon';
+import PowerSettingsNewIcon from './icons/PowerSettingsNewIcon';
+
 class TopLeftActions extends Component
 {
     render()
@@ -9,11 +12,11 @@ class TopLeftActions extends Component
         let logoutBtn = null;
 
         if (this.props.user.loginStatus === LoginStatus.LOGGED_IN)
-            logoutBtn = <li><a href="#" onClick={this.onLogout.bind(this)}><i className="material-icons">exit_to_app</i></a></li>;
+            logoutBtn = <li><a href="#" onClick={this.onLogout.bind(this)}><ExitToAppIcon /></a></li>;
 
         return (
             <ul className="top-actions left">
-                <li><a href="#" onClick={this.onQuit.bind(this)}><i className="material-icons">power_settings_new</i></a></li>
+                <li><a href="#" onClick={this.onQuit.bind(this)}><PowerSettingsNewIcon /></a></li>
                 {logoutBtn}
             </ul>
         );

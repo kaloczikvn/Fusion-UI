@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 const config = {
-    entry: [ './app/index' ],
+    entry: [ 'whatwg-fetch', './app/index' ],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'static/bundle.js',
@@ -67,7 +67,11 @@ module.exports = (env, argv) => {
         }));
     } else {
         config.devServer = {
-            hot: true,
+            hot: false,
+            liveReload: false,
+            client: {
+                reconnect: false,
+            },
             static: {
                 directory: path.join(__dirname, 'assets'),
                 publicPath: '/assets',
