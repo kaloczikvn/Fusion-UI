@@ -6,7 +6,6 @@
     left: 0;
     margin: 0;
     padding: 2.777777777777778vh; // 30px
-    box-sizing: border-box;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -35,7 +34,6 @@
         border: 0;
         padding: 0;
         margin: 0;
-        outline: 0;
         vertical-align: top;
         width: calc(100% - 22.68518518518519vh); // 100% - 245px
         background: #333;
@@ -100,7 +98,6 @@
     font-family: 'JetBrains Mono';
     -webkit-user-select: text;
     user-select: text;
-    box-sizing: border-box;
 
     strong {
         color: #da857b;

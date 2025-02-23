@@ -2,25 +2,20 @@
     .left-content {
         margin-top: 2.222222222222222vh; // 24px
         display: inline-block;
-        vertical-align: top;
         width: 70%;
         position: relative;
         padding-right: 1.851851851851852vh; // 20px
-        box-sizing: border-box;
     }
 
     .right-content {
         margin-top: 2.222222222222222vh; // 24px
         display: inline-block;
-        vertical-align: top;
         width: 29.99%;
         padding-left: 1.851851851851852vh; // 20px
-        box-sizing: border-box;
     }
 
     .column {
         display: inline-block;
-        vertical-align: top;
 
         &.column-1 {
             width: 49.99%;
@@ -65,7 +60,6 @@
 
         span {
             opacity: 0.7;
-            vertical-align: top;
             transition: opacity 150ms ease-in-out;
         }
 
@@ -304,12 +298,10 @@
         .compat-notice {
             font-size: 1.851851851851852vh; // 20px
             font-weight: 300;
-            vertical-align: middle;
 
             i {
                 color: #e14d43;
                 font-size: 20px;
-                vertical-align: middle;
                 position: relative;
                 top: -1px;
             }
@@ -340,13 +332,10 @@
             line-height: 3.703703703703704vh;
             height: 3.703703703703704vh;
             display: inline-block;
-            vertical-align: top;
             margin-left: 1.851851851851852vh;
             font-size: 1.666666666666667vh;
             opacity: 0.8;
             transition: opacity 150ms ease-in-out;
-            outline: 0;
-            box-sizing: content-box;
             
             i {
                 font-size: 2.644444444444444vh;
@@ -509,8 +498,6 @@
     .left, .right {
         width: 50%;
         display: inline-block;
-        vertical-align: top;
-        box-sizing: border-box;
     }
 
     .left {
@@ -528,7 +515,6 @@
     }
 
     input[type="text"] {
-        outline: 0;
         background: rgba(255, 255, 255, 0.1);
         width: 100%;
         height: 3.703703703703704vh; // 40px
@@ -537,7 +523,6 @@
         font-family: 'Blinker';
         font-size: 1.481481481481481vh; // 16px
         border: 0.1574074074074074vh solid rgba(255, 255, 255, 0.4);
-        box-sizing: border-box;
     }
 
     .filter {
@@ -568,7 +553,6 @@
     line-height: 1.851851851851852vh; // 20px
     font-weight: 300;
     font-size: 1.481481481481481vh; // 16px
-    vertical-align: middle;
     margin-top: 0.9259259259259259vh; // 10px
 }
 
@@ -578,11 +562,10 @@
         width: 33.3333%;
         font-weight: 300;
         font-size: 1.481481481481481vh; // 16px
-        vertical-align: middle;
 
-        input {
-            vertical-align: middle;
-        }
+        // input {
+        //     vertical-align: middle;
+        // }
 
         &:last-child {
             width: 33.3332%;
