@@ -176,7 +176,7 @@ class App extends Component
         return (
             <div id="ui-app">
                 {mainContainers}
-                <GameConsole/>
+                {/* <GameConsole/> TODO: Re-enable later */}
                 {globalNotice}
             </div>
         );
