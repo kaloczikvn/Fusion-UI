@@ -28,10 +28,15 @@ class Login extends Component
             <div id="login-page">
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <img src="/assets/img/logo.svg" />
+                    
                     <label htmlFor="username">Username</label><br/>
-                    <input type="text" ref="username" key="username" id="username" /><br/>
+                    <div className="field-container">
+                        <input type="text" ref="username" key="username" id="username" /><br/>
+                    </div>
                     <label htmlFor="password">Password</label><br/>
-                    <input type="password" ref="password" key="password" id="password" onKeyDown={this.onUpdateCapsLock} onKeyUp={this.onUpdateCapsLock} onMouseDown={this.onUpdateCapsLock} /><br/>
+                    <div className="field-container">
+                        <input type="password" ref="password" key="password" id="password" onKeyDown={this.onUpdateCapsLock} onKeyUp={this.onUpdateCapsLock} onMouseDown={this.onUpdateCapsLock} /><br/>
+                    </div>
                     <div className={capsLockNoticeClass}><strong>WARNING</strong>&nbsp;&nbsp;Caps Lock is on.</div>
                     <a href="#" className="btn border-btn primary" onClick={this.onSubmit.bind(this)}>Login</a>
                     <a href="#" className="btn border-btn" onClick={this.onSignUp.bind(this)}>Sign Up</a>
@@ -99,7 +104,9 @@ class Login extends Component
         this.props.onSetLogin();
         this.props.setPopup(<LoginPopup />);
 
-        WebUI.Call('Login', this.refs.username.value, this.refs.password.value, this.refs.remember.checked);
+        // TODO: Fix checkbox...
+        // WebUI.Call('Login', this.refs.username.value, this.refs.password.value, this.refs.remember.checked);
+        WebUI.Call('Login', this.refs.username.value, this.refs.password.value, true);
     }
 
     onSignUp(e)

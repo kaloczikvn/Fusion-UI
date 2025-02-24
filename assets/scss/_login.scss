@@ -1,7 +1,11 @@
 #login-page {
     display: flex;
     justify-content: center;
+    align-items: center;
     text-align: center;
+    height: 100%;
+    position: absolute;
+    width: 100%;
 
     .prerel-warning {
         width: 32.40740740740741vh;
@@ -30,7 +34,10 @@
     }
 
     form {
-        margin-top: 25vh; // 270px;
+        // margin-top: 25vh; // 270px;
+        display: flex;
+        flex-direction: column;
+        width: 32.40740740740741vh; // 350px
     }
 
     img {
@@ -43,6 +50,9 @@
 
     .login-actions {
         margin-top: 0.9259259259259259vh; // 10px
+
+        display: flex;
+        justify-content: space-between;
 
         label, a {
             text-decoration: none;
@@ -62,9 +72,8 @@
         }
 
         .left-actions {
-            width: 49%;
-            float: left;
-            height: 1.851851851851852vh; // 20px
+            display: flex;
+            flex-direction: row;
             line-height: 1.851851851851852vh; // 20px
 
             input[type="checkbox"] {
@@ -73,10 +82,6 @@
         }
 
         .right-actions {
-            width: 49%;
-            float: right;
-            text-align: right;
-            height: 1.851851851851852vh; // 20px
             line-height: 1.851851851851852vh; // 20px
         }
     }
@@ -87,6 +92,5 @@
         text-align: center;
         height: 3.703703703703704vh; // 40px
         line-height: 3.240740740740741vh; // 35px
-
     }
 }
