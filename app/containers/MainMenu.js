@@ -27,7 +27,7 @@ class MainMenu extends Component
             <div className="main-menu content-wrapper">
                 <div className="main-container left">
                     <a className="news-item" href={newsLeft.link} onClick={this.openNewsLink.bind(this, newsLeft.link)}>
-                        <i className="material-icons">open_in_new</i>
+                        <i className="material-icons">&#xe87c;</i>
                         <div className="news-description">
                             <h2>{newsLeft.title}</h2>
                             <h1>{newsLeft.description}</h1>

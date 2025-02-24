@@ -4,8 +4,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    -webkit-user-select: none;
-    user-select: none;
+
+    .notice-content {
+        display: flex;
+        flex-direction: column;
+    }
 
     h1 {
         display: block;
@@ -25,6 +28,12 @@
 
     .btn {
         margin: 0 0.7407407407407407vh; // 0 8px
+    }
+
+    form {
+        .field-container {
+            width: 32.40740740740741vh; // 350px;
+        }
     }
 }
 
