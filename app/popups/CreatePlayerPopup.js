@@ -78,7 +78,9 @@ class CreatePlayerPopup extends Component
                     <h1>Create new Soldier</h1>
                     <form onSubmit={this.onSubmit.bind(this)}>
                         <label htmlFor="name">Soldier Name</label><br/>
-                        <input type="text" name="name" ref="name" id="name" />
+                        <div className="field-container">
+                            <input type="text" name="name" ref="name" id="name" />
+                        </div>
                         <div className="form-actions">
                             <a href="#" className="btn border-btn" onClick={this.onClosePopup.bind(this)}>Close</a>
                             <a href="#" className="btn border-btn primary" onClick={this.onSubmit.bind(this)}>Create</a>

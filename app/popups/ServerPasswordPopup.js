@@ -29,7 +29,9 @@ class ServerPasswordPopup extends Component
                             }
                         </div>
 
-                        <input type="password" name="password" ref="password" id="password" onKeyDown={this.onUpdateCapsLock} onKeyUp={this.onUpdateCapsLock} onMouseDown={this.onUpdateCapsLock} />
+                        <div className="field-container">
+                            <input type="password" name="password" ref="password" id="password" onKeyDown={this.onUpdateCapsLock} onKeyUp={this.onUpdateCapsLock} onMouseDown={this.onUpdateCapsLock} />
+                        </div>
 
                         <div className="form-actions">
                             <a href="#" className="btn border-btn" onClick={this.onClosePopup.bind(this)}>Close</a>
