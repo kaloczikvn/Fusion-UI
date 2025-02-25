@@ -441,30 +441,79 @@
     margin-top: 0.462962962962963vh; // 5px
 }
 
-.list-body.compact .server-entry:not(.expanded) {
-    height: 3.333333333333333vh; // 36px
+// .list-body.compact .server-entry:not(.expanded) {
+//     height: 3.333333333333333vh; // 36px
 
-    .server-icons.only-tags {
-        margin-right: 1.111111111111111vh; // 12px
+//     .server-icons.only-tags {
+//         margin-right: 1.111111111111111vh; // 12px
+//     }
+
+//     .server-icon.compact-tags {
+//         display: inline;
+//     }
+
+//     .top-content {
+//         height: 3.148148148148148vh; // 34px
+
+//         h3.tags {
+//             display: none;
+//         }
+//     }
+
+//     .column.column-4 {
+//         h4 {
+//             display: none;
+//         }
+//     }
+// }
+
+/* Specific styles for non-expanded entries */
+.list-body.compact .server-entry {
+    height: 3.333333333333333vh; /* 36px */
+}
+
+.list-body.compact .server-entry .server-icons.only-tags {
+    margin-right: 1.111111111111111vh; /* 12px */
+}
+
+.list-body.compact .server-entry .server-icon.compact-tags {
+    display: inline;
+    svg{
+        fill: #61d2ff !important;
     }
+}
 
-    .server-icon.compact-tags {
-        display: inline;
-    }
+.list-body.compact .server-entry .top-content {
+    height: 3.148148148148148vh; /* 34px */
+}
 
-    .top-content {
-        height: 3.148148148148148vh; // 34px
+.list-body.compact .server-entry .top-content h3.tags {
+    display: none;
+}
 
-        h3.tags {
-            display: none;
-        }
-    }
+.list-body.compact .server-entry .column.column-4 h4 {
+    display: none;
+}
 
-    .column.column-4 {
-        h4 {
-            display: none;
-        }
-    }
+/* Override styles for expanded entries */
+.list-body.compact .server-entry.expanded {
+    height: 15.09259259259259vh;
+}
+
+.list-body.compact .server-entry.expanded .top-content h3.tags {
+    display: flex;
+}
+
+.list-body.compact .server-entry.expanded .top-content {
+    height: 7.40741vh;
+}
+
+.list-body.compact .server-entry.expanded .column.column-4 h4 {
+    display: block; 
+}
+
+.list-body.compact .server-entry.expanded .server-icon.compact-tags {
+    display: none;
 }
 
 .server-filters {
