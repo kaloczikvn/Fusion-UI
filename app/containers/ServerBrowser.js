@@ -13,10 +13,8 @@ import ConnectingServerPopup from '../popups/ConnectingServerPopup'
 import ServerEntry from "../components/ServerEntry";
 import ServerFilters from "../components/ServerFilters";
 
-class ServerBrowser extends Component
-{
-    constructor(props)
-    {
+class ServerBrowser extends Component {
+    constructor(props) {
         super(props);
 
         this.scrollbar = null;
@@ -32,42 +30,36 @@ class ServerBrowser extends Component
         };
     }
 
-    _onSortByMap = (e) =>
-    {
+    _onSortByMap = (e) => {
         if (e)
             e.preventDefault();
 
         this.sortBy(ServerSort.MAP);
     };
 
-    _onSortByGamemode = (e) =>
-    {
+    _onSortByGamemode = (e) => {
         if (e)
             e.preventDefault();
 
         this.sortBy(ServerSort.GAMEMODE);
     };
 
-    _onSortByPlayers = (e) =>
-    {
+    _onSortByPlayers = (e) => {
         if (e)
             e.preventDefault();
 
         this.sortBy(ServerSort.PLAYERS);
     };
 
-    _onSortByPing = (e) =>
-    {
+    _onSortByPing = (e) => {
         if (e)
             e.preventDefault();
 
         this.sortBy(ServerSort.PING);
     };
 
-    sortBy(sortBy)
-    {
-        if (this.props.servers.sortBy !== sortBy)
-        {
+    sortBy(sortBy) {
+        if (this.props.servers.sortBy !== sortBy) {
             this.props.sortServersBy(sortBy, SortDirection.ASC);
             return;
         }
@@ -75,8 +67,7 @@ class ServerBrowser extends Component
         this.props.cycleServerSortDirection();
     }
 
-    _onServerList = (ref) =>
-    {
+    _onServerList = (ref) => {
         if (ref === null) {
             this.scrollbar = null;
             return;
@@ -84,21 +75,19 @@ class ServerBrowser extends Component
 
         this.scrollbar = new PerfectScrollbar(ref, {
             wheelSpeed: 3,
+            suppressScrollX: true
         });
     };
 
-    componentDidUpdate()
-    {
+    componentDidUpdate() {
         if (this.scrollbar !== null)
             this.scrollbar.update();
     }
 
-    render()
-    {
+    render() {
         let servers = [];
 
-        for (const server of this.props.servers.listing)
-        {
+        for (const server of this.props.servers.listing) {
             let isFavorite = false;
             if (this.props.servers.favoriteServers.size) {
                 isFavorite = this.props.servers.favoriteServers.has(server.guid);
@@ -129,9 +118,9 @@ class ServerBrowser extends Component
         let sortIcon = '';
 
         if (this.props.servers.sortDirection === SortDirection.ASC)
-            sortIcon = 'arrow_drop_up';
+            sortIcon = <svg class="sort-indicator" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m280-400 200-200 200 200H280Z"/></svg>;
         else if (this.props.servers.sortDirection === SortDirection.DESC)
-            sortIcon = 'arrow_drop_down';
+            sortIcon = <svg class="sort-indicator" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-360 280-560h400L480-360Z"/></svg>;
 
         const mapSort = this.props.servers.sortBy === ServerSort.MAP ? sortIcon : '';
         const gamemodeSort = this.props.servers.sortBy === ServerSort.GAMEMODE ? sortIcon : '';
@@ -146,7 +135,7 @@ class ServerBrowser extends Component
         }
 
         const favoritesOnly = this.props.servers.favoriteServersOnly;
-       
+
         return (
             <div className="server-browser content-wrapper" ref={this.browserRef}>
                 <div className="server-list">
@@ -155,35 +144,48 @@ class ServerBrowser extends Component
                             <div className="header-action" onClick={this.onFetchServers.bind(this)}>
                                 <span>{serverCountText}</span>
                                 <a href="#"
-                                   className={this.props.servers.fetchStatus === ServerFetchStatus.FETCHING ? 'fetching' : ''}>
-                                    <i className="material-icons">sync</i>
+                                    className={this.props.servers.fetchStatus === ServerFetchStatus.FETCHING ? 'fetching' : ''}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M160-160v-80h110l-16-14q-52-46-73-105t-21-119q0-111 66.5-197.5T400-790v84q-72 26-116 88.5T240-478q0 45 17 87.5t53 78.5l10 10v-98h80v240H160Zm400-10v-84q72-26 116-88.5T720-482q0-45-17-87.5T650-648l-10-10v98h-80v-240h240v80H690l16 14q49 49 71.5 106.5T800-482q0 111-66.5 197.5T560-170Z" /></svg>
                                 </a>
                             </div>
                             <div id="filters_visible" className={"header-action" + (this.state.filtersVisible ? ' active' : '') + (this._hasFilterApplied() ? ' hasFilter' : '')}>
                                 <span onClick={this.onEditFilters.bind(this)}>Filters</span>
-                                <a href="#" onClick={this.onEditFilters.bind(this)}><i className="material-icons">filter_list</i></a>
+                                <a href="#" onClick={this.onEditFilters.bind(this)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" /></svg>
+                                </a>
                                 <ServerFilters visible={this.state.filtersVisible} onClose={this._onCloseFilters} />
                             </div>
                             <div className={"header-action compact" + (compactView ? ' active' : '')} onClick={this.onToggleCompactView.bind(this)}>
                                 <span>Compact view</span>
-                                <a href="#"><i className="material-icons">{compactView ? 'toggle_on' : 'toggle_off'}</i></a>
+                                <a href="#">
+                                    {compactView ?
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm400-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM480-480Z" /></svg> :
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm0-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm200-120Z" /></svg>
+                                    }
+                                </a>
                             </div>
                             <div className={"header-action compact" + (favoritesOnly ? ' active' : '')} onClick={this.onToggleFavoritesOnly.bind(this)}>
                                 <span>Favorites</span>
-                                <a href="#"><i className="material-icons">{favoritesOnly ? 'toggle_on' : 'toggle_off'}</i></a>
+                                <a href="#">
+                                    {favoritesOnly ?
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm400-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM480-480Z" /></svg> :
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-240q-100 0-170-70T40-480q0-100 70-170t170-70h400q100 0 170 70t70 170q0 100-70 170t-170 70H280Zm0-80h400q66 0 113-47t47-113q0-66-47-113t-113-47H280q-66 0-113 47t-47 113q0 66 47 113t113 47Zm0-40q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm200-120Z" /></svg>
+                                    }
+                                </a>
                             </div>
                         </div>
                         <div className="column column-2 sort-action" onClick={this._onSortByMap}>
-                            <i className="sort-indicator"/><span>Map</span><i className="sort-indicator material-icons">{mapSort}</i>
+                            <span>Map</span>
+                            {mapSort}
                         </div>
                         <div className="column column-3 sort-action" onClick={this._onSortByGamemode}>
-                            <i className="sort-indicator"/><span>Gamemode</span><i className="sort-indicator material-icons">{gamemodeSort}</i>
+                            <i className="sort-indicator" /><span>Gamemode</span><i className="sort-indicator material-icons">{gamemodeSort}</i>
                         </div>
                         <div className="column column-4 sort-action" onClick={this._onSortByPlayers}>
-                            <i className="sort-indicator"/><span>Players</span><i className="sort-indicator material-icons">{playersSort}</i>
+                            <i className="sort-indicator" /><span>Players</span><i className="sort-indicator material-icons">{playersSort}</i>
                         </div>
                         <div className="column column-5 sort-action" onClick={this._onSortByPing}>
-                            <i className="sort-indicator"/><span>Ping</span><i className="sort-indicator material-icons">{pingSort}</i>
+                            <i className="sort-indicator" /><span>Ping</span><i className="sort-indicator material-icons">{pingSort}</i>
                         </div>
                     </div>
                     <div className={listClassName} style={{ overflowX: 'hidden', width: this.state.width, height: this.state.height }} ref={this._onServerList} >
@@ -195,26 +197,23 @@ class ServerBrowser extends Component
     }
 
     _hasFilterApplied = () => {
-        if (this.props.filters === null) 
+        if (this.props.filters === null)
             return false;
 
         return JSON.stringify(this.props.filters) !== JSON.stringify(ServerFilters.getDefaultFilters());
     }
 
-    _onCloseFilters = () =>
-    {
+    _onCloseFilters = () => {
         this.setState({ filtersVisible: false });
     }
 
-    onFetchServers(e)
-    {
+    onFetchServers(e) {
         if (e)
             e.preventDefault();
 
         this.setState({ expandedServer: null });
 
-        if (this.props.servers.fetchStatus === ServerFetchStatus.FETCHING)
-        {
+        if (this.props.servers.fetchStatus === ServerFetchStatus.FETCHING) {
             this.props.onResetServerFetch();
             return;
         }
@@ -222,71 +221,62 @@ class ServerBrowser extends Component
         WebUI.Call('FetchServers');
     }
 
-    onEditFilters(e)
-    {
+    onEditFilters(e) {
         if (e)
             e.preventDefault();
 
         this.setState({ filtersVisible: !this.state.filtersVisible });
     }
 
-    onToggleCompactView(e)
-    {
+    onToggleCompactView(e) {
         if (e)
             e.preventDefault();
 
         this.props.toggleCompactView();
     }
 
-    onToggleFavoritesOnly(e)
-    {
+    onToggleFavoritesOnly(e) {
         if (e)
             e.preventDefault();
 
         this.props.toggleFavoritesOnly();
     }
 
-    _onExpandServer = (guid) =>
-    {
+    _onExpandServer = (guid) => {
         this.setState({ expandedServer: guid });
     };
 
-    _onJoinServer = (guid, password) =>
-    {
+    _onJoinServer = (guid, password) => {
         if (this.props.servers.connectStatus === ServerConnectStatus.CONNECTING)
             return;
 
         this.props.setConnectionStatus();
         this.props.setPopup(<ConnectingServerPopup />);
 
-        if (password && password.length > 0)
-        {
-            setTimeout(function() { WebUI.Call('ConnectToServer', guid, password); }, 500);
+        if (password && password.length > 0) {
+            setTimeout(function () { WebUI.Call('ConnectToServer', guid, password); }, 500);
             return;
         }
 
-        setTimeout(function() { WebUI.Call('ConnectToServer', guid); }, 500);
+        setTimeout(function () { WebUI.Call('ConnectToServer', guid); }, 500);
     };
 
-    _onSpectateServer = (guid, password) =>
-    {
+    _onSpectateServer = (guid, password) => {
         if (this.props.servers.connectStatus === ServerConnectStatus.CONNECTING)
             return;
 
         this.props.setConnectionStatus();
         this.props.setPopup(<ConnectingServerPopup />);
 
-        if (password && password.length > 0)
-        {
-            setTimeout(function() { WebUI.Call('SpectateServer', guid, password); }, 500);
+        if (password && password.length > 0) {
+            setTimeout(function () { WebUI.Call('SpectateServer', guid, password); }, 500);
             return;
         }
 
-        setTimeout(function() { WebUI.Call('SpectateServer', guid); }, 500);
+        setTimeout(function () { WebUI.Call('SpectateServer', guid); }, 500);
     };
 
-    _onAddRemoveFavorite = (server, isFavorite) =>
-    {
+    _onAddRemoveFavorite = (server, isFavorite) => {
         if (isFavorite) {
             this.props.removeFavorite(server);
             return;
@@ -295,8 +285,7 @@ class ServerBrowser extends Component
         this.props.addFavorite(server);
     };
 
-    componentDidMount()
-    {
+    componentDidMount() {
         this.props.disableBlur();
         this.props.enableMenu();
 
@@ -309,14 +298,12 @@ class ServerBrowser extends Component
         this.onFetchServers();
     }
 
-    componentWillUnmount()
-    {
+    componentWillUnmount() {
         window.removeEventListener('resize', this._onResize);
         window.removeEventListener('click', this._onHandleClickOutsideOfFiltersBox);
     }
 
-    _onResize = () =>
-    {
+    _onResize = () => {
         if (!this.browserRef.current || !this.headerRef.current) {
             return;
         }

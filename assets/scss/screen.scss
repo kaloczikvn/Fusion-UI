@@ -61,6 +61,8 @@ a {
 }
 
 #app-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     position: relative;
@@ -80,10 +82,7 @@ a {
     display: block;
     height: 100%;
     width: 133.333333333333vh;
-    position: relative;
-    margin: -9.25925925925926vh auto 0;
     z-index: 1;
-    padding: 9.25925925925926vh 2.777777777777778vh; // 100px 30px
     overflow: hidden;
 }
 

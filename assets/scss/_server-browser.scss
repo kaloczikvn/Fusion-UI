@@ -1,4 +1,5 @@
 .server-browser {
+    align-self: center;
     .left-content {
         margin-top: 2.222222222222222vh; // 24px
         display: inline-block;
@@ -18,6 +19,8 @@
         display: inline-block;
 
         &.column-1 {
+            display: flex;
+            flex-direction: column;
             width: 49.99%;
         }
 
@@ -47,6 +50,7 @@
 
 .server-list {
     .list-header {
+        display: flex;
         font-size: 1.666666666666667vh; // 18px
         font-weight: 500;
         color: #fff;
@@ -63,39 +67,30 @@
             transition: opacity 150ms ease-in-out;
         }
 
-        i {
-            opacity: 0.5;
-            font-size: 1.851851851851852vh; // 20px
-            position: relative;
-            top: 0.3703703703703704vh; // 4px
-            padding: 0 0.5555555555555556vh; // 0 6px
+        svg {
             transition: opacity 150ms ease-in-out;
 
             &.sort-indicator {
-                color: #fff;
-                font-size: 2.314814814814815vh; // 25px
-                width: 2.314814814814815vh; // 25px
-                padding: 0;
-                display: inline-block;
+                fill: #fff;
                 opacity: 0.4;
             }
         }
 
         .header-action {
             margin-right: 2.5925925925925925925925925925926vh; // 28px
-            display: inline;
+            display: flex;
             position: relative;
-
+            align-items: center;
             &:hover {
                 span,
-                i {
+                svg {
                     opacity: 0.8;
                 }
             }
 
-            &.active i {
+            &.active svg {
                 opacity: 1.0;
-                color: #e14d43;
+                fill: #e14d43;
             }
 
             &.hasFilter {
@@ -113,31 +108,41 @@
             }
 
             a.fetching {
-                i {
-                    color: #e14d43;
+                svg {
+                    fill: #e14d43;
                     opacity: 1.0;
                     animation: spin-reverse 1s infinite linear;
                 }
             }
 
-            &.compact {
-                i {
-                    font-size: 1.851851851851852vh; // 20px
-                }
+            a {
+                margin-left: 5px;
+                display: flex;
+                align-items: center;
             }
         }
 
         .sort-action {
+            display: flex;
+            align-items: center;
             &:hover {
                 span {
                     opacity: 1;
                 }
             }
         }
+
+        .column-1{
+            flex-direction: row !important;
+        }
+        .column {
+            display: flex;
+        }
     }
 
     .main-list-body {
-        max-height: 84vh;
+        width: 100% !important;
+        height: 75vh !important;
         overflow-y: auto;
         position: relative;
 
@@ -220,6 +225,8 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
         }
 
         h2 {
@@ -233,23 +240,24 @@
         }
 
         h3 {
+            display: flex;
+            align-items: center;
             font-weight: 300;
             font-size: 1.759259259259259vh; // 19px
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-
+            margin-top: 5px !important;
             &.tags {
-                margin-top: 0.462962962962963vh; // 5px
-
-                i {
-                    display: inline;
-                    margin-right: 1.111111111111111vh; // 12px
-                    opacity: 0.5;
-                    font-size: 1.388888888888889vh; // 15px
-                    position: relative;
-                    top: 0.2777777777777778vh; // 3px
-                }
+                margin: 0 2px;
+                // svg {
+                //     display: inline;
+                //     margin-right: 1.111111111111111vh; // 12px
+                //     opacity: 0.5;
+                //     font-size: 1.388888888888889vh; // 15px
+                //     position: relative;
+                //     top: 0.2777777777777778vh; // 3px
+                // }
 
                 strong {
                     color: #61d2ff;
@@ -259,9 +267,13 @@
                     margin-right: 0.5555555555555556vh; // 6px
                 }
             }
+            svg {
+                margin-right: 5px;
+            }
         }
 
         h4 {
+            display: flex;
             font-weight: 300;
             font-size: 1.481481481481481vh; // 16px
             color: rgba(255, 255, 255, 0.7);
@@ -293,17 +305,14 @@
 
         .right-content {
             text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
         }
 
         .compat-notice {
-            font-size: 1.851851851851852vh; // 20px
-            font-weight: 300;
-
-            i {
-                color: #e14d43;
-                font-size: 20px;
-                position: relative;
-                top: -1px;
+            svg {
+                fill: #e14d43;
             }
         }
 
@@ -315,6 +324,9 @@
             }
 
             &.spec-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 opacity: 0.6;
 
                 &:hover {
@@ -323,32 +335,21 @@
             }
 
             &.join-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 border-color: #e14d43;
                 //color: #e14d43;
             }
         }
 
         .favorite-btn {
-            line-height: 3.703703703703704vh;
-            height: 3.703703703703704vh;
-            display: inline-block;
-            margin-left: 1.851851851851852vh;
-            font-size: 1.666666666666667vh;
-            opacity: 0.8;
-            transition: opacity 150ms ease-in-out;
-            
-            i {
-                font-size: 2.644444444444444vh;
-                position: relative;
-                top: 0.7703703703703704vh;
-            }
-
             &:hover {
                 opacity: 1.0;
             }
 
             &.is-favorite {
-                color: #e14d43;
+                fill: #e14d43;
             }
         }
     }
@@ -419,20 +420,9 @@
         }
     }
 
+
     .server-icon {
         opacity: 0.5;
-
-        i {
-            font-size: 1.481481481481481vh; // 16px
-            position: relative;
-            top: 0.1851851851851852vh; // 2px
-        }
-
-        &.freq i {
-            font-size: 1.851851851851852vh; // 20px
-            top: 0.3703703703703704vh; // 4px
-        }
-
         &.compact-tags {
             color: #61d2ff;
             position: relative;
