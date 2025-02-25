@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import ServerEntry from "./ServerEntry";
 import * as ActionTypes from "../constants/ActionTypes";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
-class ServerFilters extends Component
-{
-    constructor(props)
-    {
+class ServerFilters extends Component {
+    constructor(props) {
         super(props);
 
         let filters = props.servers.filters;
@@ -20,8 +18,7 @@ class ServerFilters extends Component
         };
     }
 
-    render()
-    {
+    render() {
         const selectStyle = {
             control: (provided) => ({
                 ...provided,
@@ -44,12 +41,10 @@ class ServerFilters extends Component
                 let color = '#fff';
                 let fontWeight = 300;
 
-                if (state.isFocused && !state.isSelected)
-                {
+                if (state.isFocused && !state.isSelected) {
                     backgroundColor = 'rgba(255, 255, 255, 0.2)';
                 }
-                else if (state.isSelected)
-                {
+                else if (state.isSelected) {
                     backgroundColor = 'rgba(255, 255, 255, 0.8)';
                     color = '#000';
                     fontWeight = 500;
@@ -144,8 +139,7 @@ class ServerFilters extends Component
         const gamemodeSet = new Set();
         const tagSet = new Set();
 
-        for (const server of this.props.servers.originalListing)
-        {
+        for (const server of this.props.servers.originalListing) {
             mapSet.add(server.variables.mapname);
             gamemodeSet.add(server.variables.gamemode);
 
@@ -154,8 +148,7 @@ class ServerFilters extends Component
             if (server.variables.tags && server.variables.tags.length > 0)
                 serverTags = server.variables.tags.split(',');
 
-            for (const tag of serverTags)
-            {
+            for (const tag of serverTags) {
                 if (!/^[a-z0-9-]+$/.test(tag))
                     continue;
 
@@ -168,8 +161,7 @@ class ServerFilters extends Component
         for (const map of mapSet)
             mapOptions.push({ value: map, label: ServerEntry.getMapName(map) });
 
-        mapOptions.sort((a, b) =>
-        {
+        mapOptions.sort((a, b) => {
             return a.label.localeCompare(b.label);
         });
 
@@ -183,8 +175,7 @@ class ServerFilters extends Component
         for (const gamemode of gamemodeSet)
             gamemodeOptions.push({ value: gamemode, label: ServerEntry.getGamemodeName(gamemode) });
 
-        gamemodeOptions.sort((a, b) =>
-        {
+        gamemodeOptions.sort((a, b) => {
             return a.label.localeCompare(b.label);
         });
 
@@ -243,50 +234,52 @@ class ServerFilters extends Component
                         isMulti
                     />
                 </div>
-                <div className="left">
-                    <div className="filter">
-                        <h3>Server name</h3>
-                        <input type="text" value={this.state.serverName} onChange={this._onChangeServerName} onKeyDown={this._onKeyDown} />
-                    </div>
-                    <div className="filter">
-                        <h3>Player count</h3>
-                        <div className="min-max-ctr">
-                            <label>Min<input type="text" value={this.state.minPlayers} onChange={this._onChangeMinPlayers} onKeyDown={this._onKeyDown} /></label>
-                            <label>Max<input type="text" value={this.state.maxPlayers} onChange={this._onChangeMaxPlayers} onKeyDown={this._onKeyDown} /></label>
+                <div className="left-right-flex">
+                    <div className="left">
+                        <div className="filter">
+                            <h3>Server name</h3>
+                            <input type="text" value={this.state.serverName} onChange={this._onChangeServerName} onKeyDown={this._onKeyDown} />
+                        </div>
+                        <div className="filter">
+                            <h3>Player count</h3>
+                            <div className="min-max-ctr">
+                                <label>Min<input type="text" value={this.state.minPlayers} onChange={this._onChangeMinPlayers} onKeyDown={this._onKeyDown} /></label>
+                                <label>Max<input type="text" value={this.state.maxPlayers} onChange={this._onChangeMaxPlayers} onKeyDown={this._onKeyDown} /></label>
+                            </div>
+                        </div>
+                        <div className="filter">
+                            <h3>Ping</h3>
+                            <div className="min-max-ctr">
+                                <label>Min<input type="text" value={this.state.minPing} onChange={this._onChangeMinPing} onKeyDown={this._onKeyDown} /></label>
+                                <label>Max<input type="text" value={this.state.maxPing} onChange={this._onChangeMaxPing} onKeyDown={this._onKeyDown} /></label>
+                            </div>
                         </div>
                     </div>
-                    <div className="filter">
-                        <h3>Ping</h3>
-                        <div className="min-max-ctr">
-                            <label>Min<input type="text" value={this.state.minPing} onChange={this._onChangeMinPing} onKeyDown={this._onKeyDown} /></label>
-                            <label>Max<input type="text" value={this.state.maxPing} onChange={this._onChangeMaxPing} onKeyDown={this._onKeyDown} /></label>
+                    <div className="right">
+                        <div className="filter">
+                            <h3>Server frequency</h3>
+                            <div className="frequency-filters">
+                                <label>
+                                    <input type="checkbox" checked={this.state.freq30Hz} onChange={this._onChangeFreq30Hz} />
+                                    30Hz
+                                </label>
+                                <label>
+                                    <input type="checkbox" checked={this.state.freq60Hz} onChange={this._onChangeFreq60Hz} />
+                                    60Hz
+                                </label>
+                                <label>
+                                    <input type="checkbox" checked={this.state.freq120Hz} onChange={this._onChangeFreq120Hz} />
+                                    120Hz
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className="right">
-                    <div className="filter">
-                        <h3>Server frequency</h3>
-                        <div className="frequency-filters">
-                            <label>
-                                <input type="checkbox" checked={this.state.freq30Hz} onChange={this._onChangeFreq30Hz} />
-                                30Hz
-                            </label>
-                            <label>
-                                <input type="checkbox" checked={this.state.freq60Hz} onChange={this._onChangeFreq60Hz} />
-                                60Hz
-                            </label>
-                            <label>
-                                <input type="checkbox" checked={this.state.freq120Hz} onChange={this._onChangeFreq120Hz} />
-                                120Hz
-                            </label>
+                        <div className="filter">
+                            <h3>Visibility filters</h3>
+                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideFull} onChange={this._onChangeHideFull} /> Hide full servers</label>
+                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideEmpty} onChange={this._onChangeHideEmpty} /> Hide empty servers</label>
+                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hidePassworded} onChange={this._onChangeHidePassworded} /> Hide password protected</label>
+                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideIncompatible} onChange={this._onChangeHideIncompatible} /> Hide incompatible servers</label>
                         </div>
-                    </div>
-                    <div className="filter">
-                        <h3>Visibility filters</h3>
-                        <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideFull} onChange={this._onChangeHideFull} /> Hide full servers</label>
-                        <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideEmpty} onChange={this._onChangeHideEmpty} /> Hide empty servers</label>
-                        <label className="filter-checkbox"><input type="checkbox" checked={this.state.hidePassworded} onChange={this._onChangeHidePassworded} /> Hide password protected</label>
-                        <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideIncompatible} onChange={this._onChangeHideIncompatible} /> Hide incompatible servers</label>
                     </div>
                 </div>
                 <div className="filter-buttons">
@@ -298,22 +291,19 @@ class ServerFilters extends Component
         );
     }
 
-    _onKeyDown = (e) =>
-    {
+    _onKeyDown = (e) => {
         if (e.keyCode === 13)
             this._onApplyFilters();
     };
 
-    _onClose = (e) =>
-    {
+    _onClose = (e) => {
         if (e)
             e.preventDefault();
 
         this.props.onClose();
     }
 
-    _onResetFilters = (e) =>
-    {
+    _onResetFilters = (e) => {
         if (e)
             e.preventDefault();
 
@@ -324,16 +314,14 @@ class ServerFilters extends Component
         this.props.setServerFilters(ServerFilters.getDefaultFilters());
     };
 
-    _onApplyFilters = (e) =>
-    {
+    _onApplyFilters = (e) => {
         if (e)
             e.preventDefault();
 
         this.props.setServerFilters(this.state);
     };
 
-    _onChangeMaps = (mapsValues) =>
-    {
+    _onChangeMaps = (mapsValues) => {
         const maps = [];
 
         if (mapsValues !== null)
@@ -345,8 +333,7 @@ class ServerFilters extends Component
         });
     };
 
-    _onChangeGamemodes = (gamemodesValues) =>
-    {
+    _onChangeGamemodes = (gamemodesValues) => {
         const gamemodes = [];
 
         if (gamemodesValues !== null)
@@ -358,8 +345,7 @@ class ServerFilters extends Component
         });
     };
 
-    _onChangeTags = (tagsValues) =>
-    {
+    _onChangeTags = (tagsValues) => {
         const tags = [];
 
         if (tagsValues !== null)
@@ -371,22 +357,19 @@ class ServerFilters extends Component
         });
     };
 
-    _onChangeServerName = (e) =>
-    {
+    _onChangeServerName = (e) => {
         this.setState({
             serverName: e.target.value,
         });
     };
 
-    _onChangeMinPlayers = (e) =>
-    {
+    _onChangeMinPlayers = (e) => {
         let value = e.target.value;
 
         // Make sure to only allow numbers.
         value = value.replace(/[^0-9]/g, '');
 
-        if (value.length === 0)
-        {
+        if (value.length === 0) {
             e.target.value = '';
 
             this.setState({
@@ -401,15 +384,13 @@ class ServerFilters extends Component
         });
     };
 
-    _onChangeMaxPlayers = (e) =>
-    {
+    _onChangeMaxPlayers = (e) => {
         let value = e.target.value;
 
         // Make sure to only allow numbers.
         value = value.replace(/[^0-9]/g, '');
 
-        if (value.length === 0)
-        {
+        if (value.length === 0) {
             e.target.value = '';
 
             this.setState({
@@ -424,15 +405,13 @@ class ServerFilters extends Component
         });
     };
 
-    _onChangeMinPing = (e) =>
-    {
+    _onChangeMinPing = (e) => {
         let value = e.target.value;
 
         // Make sure to only allow numbers.
         value = value.replace(/[^0-9]/g, '');
 
-        if (value.length === 0)
-        {
+        if (value.length === 0) {
             e.target.value = '';
 
             this.setState({
@@ -447,15 +426,13 @@ class ServerFilters extends Component
         });
     };
 
-    _onChangeMaxPing = (e) =>
-    {
+    _onChangeMaxPing = (e) => {
         let value = e.target.value;
 
         // Make sure to only allow numbers.
         value = value.replace(/[^0-9]/g, '');
 
-        if (value.length === 0)
-        {
+        if (value.length === 0) {
             e.target.value = '';
 
             this.setState({
@@ -470,57 +447,49 @@ class ServerFilters extends Component
         });
     };
 
-    _onChangeFreq30Hz = (e) =>
-    {
+    _onChangeFreq30Hz = (e) => {
         this.setState({
             freq30Hz: e.target.checked,
         })
     };
 
-    _onChangeFreq60Hz = (e) =>
-    {
+    _onChangeFreq60Hz = (e) => {
         this.setState({
             freq60Hz: e.target.checked,
         })
     };
 
-    _onChangeFreq120Hz = (e) =>
-    {
+    _onChangeFreq120Hz = (e) => {
         this.setState({
             freq120Hz: e.target.checked,
         })
     };
 
-    _onChangeHideFull = (e) =>
-    {
+    _onChangeHideFull = (e) => {
         this.setState({
             hideFull: e.target.checked,
         })
     };
 
-    _onChangeHideEmpty = (e) =>
-    {
+    _onChangeHideEmpty = (e) => {
         this.setState({
             hideEmpty: e.target.checked,
         })
     };
 
-    _onChangeHidePassworded = (e) =>
-    {
+    _onChangeHidePassworded = (e) => {
         this.setState({
             hidePassworded: e.target.checked,
         })
     };
 
-    _onChangeHideIncompatible = (e) =>
-    {
+    _onChangeHideIncompatible = (e) => {
         this.setState({
             hideIncompatible: e.target.checked,
         })
     };
 
-    static getDefaultFilters()
-    {
+    static getDefaultFilters() {
         return {
             maps: [],
             gamemodes: [],
