@@ -297,6 +297,7 @@ class Settings extends Component
 
         this.modSettingsScrollbar = new PerfectScrollbar(ref, {
             wheelSpeed: 3,
+            suppressScrollX: true
         });
     };
 

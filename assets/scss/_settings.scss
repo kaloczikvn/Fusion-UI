@@ -1,5 +1,6 @@
 .settings {
   .tabs {
+    display: flex;
     font-size: 1.666666666666667vh;
     font-weight: 500;
     color: #fff;
@@ -17,7 +18,7 @@
       /*&:first-of-type {
         padding-left: 0;
       }*/
-    
+
       &:hover {
         opacity: 0.5;
       }
@@ -34,7 +35,9 @@
   .tab-inner {
     position: relative;
     border: 0.15741vh solid rgba(255, 255, 255, 0.2);
-    height: calc(100% - 11.703703703703704vh);
+    height: 70%;
+    overflow-y: scroll;
+    overflow-x: hidden !important;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(0.9259259259259vh);
   }
@@ -56,16 +59,14 @@
   }
 
   .mod-settings-container {
-    display: grid;
-    grid-template-columns: 28vh 1fr;
-    grid-gap: 0;
+    display: flex;
     height: 100%;
 
     .mod-search-bar {
       height: 4.472222vh;
       left: 0;
       top: 0;
-      width: 28vh;
+      width: 20%;
       position: absolute;
 
       input[type="text"] {
@@ -86,7 +87,7 @@
       position: relative;
       height: calc(100% - 4.472222vh);
       margin-top: 4.472222vh;
-
+      width: 20%;
       &.no-mod {
         display: flex;
         align-items: center;
@@ -98,7 +99,7 @@
         padding: 0 0.9259259259259259vh;
         line-height: 2vh;
         height: 4.472222vh; // 40px
-        
+
         span {
           height: 100%;
           opacity: .4;
@@ -134,7 +135,7 @@
       position: relative;
       max-height: calc(100% - 4vh);
       padding: 2vh;
-
+      width: 80%;
       &.no-mod {
         display: flex;
         align-items: center;
@@ -149,23 +150,38 @@
 }
 
 .settings-row {
+  display: flex;
   margin-bottom: 1.851851851851852vh; // 20px
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 5vh;
   align-items: center;
+
+  h3 {
+    flex: 33%;
+  }
+
+  .slider-input {
+    display: flex;
+    align-items: center;
+
+    .slider-value {
+      margin-right: 2vmin;
+    }
+  }
+}
+
+.settings-row>div {
+  flex: 33%;
 }
 
 .settings-buttons {
   text-align: right;
-  bottom: 9.25925925925926vh;
-  right: 2.777777777777778vh;
-  position: absolute;
+  display: flex;
+  align-self: flex-end;
+  margin-top: 4vmin;
 }
 
 #settings-popup {
   height: 100%;
-  
+
   .settings {
     margin: 0 auto;
   }
