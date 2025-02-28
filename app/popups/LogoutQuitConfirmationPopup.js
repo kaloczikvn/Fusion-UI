@@ -11,8 +11,10 @@ class LogoutQuitConfirmationPopup extends Component
                 <div className="notice-content">
                     <h1>Logout & Quit</h1>
                     <p>Are you sure you want to log out and quit?</p>
+                    <div className='action-buttons'>
                     <a href="#" className="btn border-btn" onClick={this.onClosePopup.bind(this)}>Cancel</a>
                     <a href="#" className="btn border-btn primary" onClick={this.onConfirmQuit.bind(this)}>Logout & Quit</a>
+                    </div>
                 </div>
             </div>
         );

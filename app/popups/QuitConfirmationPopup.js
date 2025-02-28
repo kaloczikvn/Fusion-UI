@@ -14,8 +14,10 @@ class QuitConfirmationPopup extends Component
                 <div className="notice-content">
                     <h1>Quit Game</h1>
                     <p>Are you sure you want to quit {this.props.base.productName}?</p>
-                    <a href="#" className="btn border-btn" onClick={this.onClosePopup.bind(this)}>Cancel</a>
-                    <a href="#" className="btn border-btn primary" onClick={this.onConfirmQuit.bind(this)}>Quit</a>
+                    <div className='action-buttons'>
+                        <a href="#" className="btn border-btn" onClick={this.onClosePopup.bind(this)}>Cancel</a>
+                        <a href="#" className="btn border-btn primary" onClick={this.onConfirmQuit.bind(this)}>Quit</a>
+                    </div>
                 </div>
             </div>
         );

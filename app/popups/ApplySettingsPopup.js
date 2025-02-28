@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as ActionTypes from '../constants/ActionTypes'
 
-class ApplySettingsPopup extends Component
-{
-    constructor(props)
-    {
+class ApplySettingsPopup extends Component {
+    constructor(props) {
         super(props);
 
         this.timer = null;
@@ -14,8 +12,7 @@ class ApplySettingsPopup extends Component
         };
     }
 
-    render()
-    {
+    render() {
         let seconds = this.state.timeRemaining;
 
         if (seconds < 0)
@@ -31,20 +28,20 @@ class ApplySettingsPopup extends Component
                 <div className="notice-content">
                     <h1>Keep these settings?</h1>
                     <p>Are you sure you want to keep these settings? Reverting to previous settings in {remainingTime}.</p>
-                    <a href="#" className="btn border-btn" onClick={this._onRevertSettings}>Revert</a>
-                    <a href="#" className="btn border-btn primary" onClick={this._onKeepSettings}>Keep settings</a>
+                    <div className='action-buttons'>
+                        <a href="#" className="btn border-btn" onClick={this._onRevertSettings}>Revert</a>
+                        <a href="#" className="btn border-btn primary" onClick={this._onKeepSettings}>Keep settings</a>
+                    </div>
                 </div>
             </div>
         );
     }
 
-    _onKeepSettings = (e) =>
-    {
+    _onKeepSettings = (e) => {
         if (e)
             e.preventDefault();
 
-        if (this.timer !== null)
-        {
+        if (this.timer !== null) {
             clearTimeout(this.timer);
             this.timer = null;
         }
@@ -54,13 +51,11 @@ class ApplySettingsPopup extends Component
         this.props.closePopup();
     };
 
-    _onRevertSettings = (e) =>
-    {
+    _onRevertSettings = (e) => {
         if (e)
             e.preventDefault();
 
-        if (this.timer !== null)
-        {
+        if (this.timer !== null) {
             clearTimeout(this.timer);
             this.timer = null;
         }
@@ -72,10 +67,8 @@ class ApplySettingsPopup extends Component
         this.props.closePopup();
     };
 
-    _tickDown = () =>
-    {
-        if (this.state.timeRemaining <= 1)
-        {
+    _tickDown = () => {
+        if (this.state.timeRemaining <= 1) {
             this.timer = null;
             this._onRevertSettings();
             return;
@@ -88,17 +81,14 @@ class ApplySettingsPopup extends Component
         this.timer = setTimeout(this._tickDown, 1000);
     };
 
-    componentDidMount()
-    {
+    componentDidMount() {
         document.activeElement.blur();
 
         this.timer = setTimeout(this._tickDown, 1000);
     }
 
-    componentWillUnmount()
-    {
-        if (this.timer !== null)
-        {
+    componentWillUnmount() {
+        if (this.timer !== null) {
             clearTimeout(this.timer);
             this.timer = null;
         }
@@ -118,7 +108,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({ type: ActionTypes.SET_POPUP, popup: null })
         },
         setSettings: (settings) => {
-            dispatch({ type: ActionTypes.SET_SETTINGS, settings,  });
+            dispatch({ type: ActionTypes.SET_SETTINGS, settings, });
         }
     };
 };
