@@ -17,7 +17,7 @@
 
     .column {
         display: inline-block;
-
+        overflow: hidden;
         &.column-1 {
             display: flex;
             flex-direction: column;
@@ -221,7 +221,7 @@
 
         h1 {
             font-weight: 500;
-            font-size: 1.851851851851852vh; // 20px
+            font-size: 1.651851851851852vh; // 20px
             white-space: nowrap;
             // overflow: hidden;
             text-overflow: ellipsis;
@@ -231,7 +231,7 @@
 
         h2 {
             font-weight: 300;
-            font-size: 1.666666666666667vh; // 18px
+            font-size: 1.566666666666667vh; // 18px
             color: rgba(255, 255, 255, 0.7);
             text-shadow: 0 0 0.3703703703703704vh rgba(0, 0, 0, 0.8); // 4px
             white-space: nowrap;
@@ -243,7 +243,7 @@
             display: flex;
             align-items: center;
             font-weight: 300;
-            font-size: 1.759259259259259vh; // 19px
+            font-size: 1.459259259259259vh; // 19px
             white-space: nowrap;
             // overflow: hidden;
             text-overflow: ellipsis;
