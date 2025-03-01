@@ -15,6 +15,8 @@ export const SELECT_STYLE = {
         color: '#fff',
         fontWeight: 300,
         fontSize: '1.851851851851852vh', // 20px
+        marginLeft: '1vh !important',
+        lineHeight: '3.5463vh !important'
     }),
     menuList: (provided, state) => ({
         ...provided,

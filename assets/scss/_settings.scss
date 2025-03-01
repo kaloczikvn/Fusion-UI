@@ -64,8 +64,8 @@
 
     .mod-search-bar {
       height: 4.472222vh;
-      left: 0;
-      top: 0;
+      left: 1px;
+      top: 1px;
       width: 20%;
       position: absolute;
 
@@ -164,11 +164,20 @@
 
     .slider-value {
       margin-right: 2vmin;
+      line-height: 3vh;
     }
   }
 }
 
 .settings-row>div {
+  flex: 33%;
+}
+
+.settings-row > input {
+  flex: 33%;
+}
+
+.settings-row > label {
   flex: 33%;
 }
 
