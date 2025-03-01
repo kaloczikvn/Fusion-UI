@@ -11,51 +11,48 @@ import PlayerDeleteConfirmationPopup from '../popups/PlayerDeleteConfirmationPop
 
 import SoldierEntry from '../components/SoldierEntry'
 
-class Soldiers extends Component
-{
-    render()
-    {
+class Soldiers extends Component {
+    render() {
         let players = [];
 
-        for (let i = 0; i < this.props.user.players.length; ++i)
-        {
-            let actions = [];
+        if (this.props.user && this.props.user.player) {
+            for (let i = 0; i < this.props.user.players.length; ++i) {
+                let actions = [];
 
-            if (this.props.user.players[i].guid !== this.props.user.player.guid)
-            {
-                actions = [
-                    {
-                        icon: 'delete',
-                        callback: (e) => { this.onDeletePlayer(this.props.user.players[i].name, this.props.user.players[i].guid, e)}
-                    },
-                    {
-                        icon: 'exit_to_app',
-                        callback: (e) => { this.onLoginPlayer(this.props.user.players[i].guid, e)}
-                    }
-                ];
+                if (this.props.user.players[i].guid !== this.props.user.player.guid) {
+                    actions = [
+                        {
+                            icon: 'delete',
+                            callback: (e) => { this.onDeletePlayer(this.props.user.players[i].name, this.props.user.players[i].guid, e) }
+                        },
+                        {
+                            icon: 'exit_to_app',
+                            callback: (e) => { this.onLoginPlayer(this.props.user.players[i].guid, e) }
+                        }
+                    ];
+                }
+
+                players.push(
+                    <SoldierEntry
+                        key={this.props.user.players[i].guid}
+                        name={this.props.user.players[i].name}
+                        actions={actions}
+                        title="Soldier"
+                    />
+                );
             }
-
-            players.push(
-                <SoldierEntry
-                    key={this.props.user.players[i].guid}
-                    name={this.props.user.players[i].name}
-                    actions={actions}
-                    title="Soldier"
-                />
-            );
         }
 
         let playerCount = players.length;
 
-        for (let i = 0; i < 3 - playerCount; ++i)
-        {
+        for (let i = 0; i < 3 - playerCount; ++i) {
             players.push(
                 <SoldierEntry
                     key={'create-' + i}
                     actions={[
                         {
                             icon: 'library_add',
-                            callback: (e) => { this.onCreatePlayer(e)}
+                            callback: (e) => { this.onCreatePlayer(e) }
                         }
                     ]}
                     title="Create new Soldier"
@@ -71,8 +68,7 @@ class Soldiers extends Component
         );
     }
 
-    onDeletePlayer(name, guid, e)
-    {
+    onDeletePlayer(name, guid, e) {
         if (e)
             e.preventDefault();
 
@@ -80,8 +76,7 @@ class Soldiers extends Component
         this.props.setPopup(<PlayerDeleteConfirmationPopup name={name} guid={guid} />);
     }
 
-    onLoginPlayer(guid, e)
-    {
+    onLoginPlayer(guid, e) {
         if (e)
             e.preventDefault();
 
@@ -91,32 +86,28 @@ class Soldiers extends Component
         WebUI.Call('LoginPlayer', guid);
     }
 
-    onResetPlayerCreate(e)
-    {
+    onResetPlayerCreate(e) {
         if (e)
             e.preventDefault();
 
         this.props.onResetPlayerCreate();
     }
 
-    onResetPlayerDelete(e)
-    {
+    onResetPlayerDelete(e) {
         if (e)
             e.preventDefault();
 
         this.props.onResetPlayerDelete();
     }
 
-    onResetPlayerLogin(e)
-    {
+    onResetPlayerLogin(e) {
         if (e)
             e.preventDefault();
 
         this.props.onResetPlayerLogin();
     }
 
-    onCreatePlayer(e)
-    {
+    onCreatePlayer(e) {
         if (e)
             e.preventDefault();
 
@@ -124,14 +115,12 @@ class Soldiers extends Component
         this.props.setPopup(<CreatePlayerPopup />);
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         this.props.disableBlur();
         this.props.enableMenu();
     }
 
-    componentWillUnmount()
-    {
+    componentWillUnmount() {
         this.props.setPopup(null);
     }
 }

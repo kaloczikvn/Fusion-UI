@@ -816,7 +816,7 @@ setTimeout(() => {
 }, 1000);*/
 
 setTimeout(() => {
-    hashHistory.push('/server-browser');
+    hashHistory.push('/soldiers');
 }, 250);
 
 setInterval(() => {

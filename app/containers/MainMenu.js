@@ -42,16 +42,6 @@ class MainMenu extends Component
                             <h1>{newsRight.description}</h1>
                         </div>
                     </a>
-                    {/*<a className="matchmake-btn">
-                        <i className="material-icons">play_arrow</i>
-                    </a>
-                    <div className="matchmaking-container">
-                        <h2>Selected Gamemodes</h2>
-                        <h1>Conquest, Rush, TDM, SQDM, Squad Rush, Obliteration, Defuse, Domination, Air Superiority, CTF, Carrier Assault, Chain Link</h1>
-                        <div className="bottom-actions">
-                            <a>Matchmaking Preferences</a>
-                        </div>
-                    </div>*/}
                 </div>
             </div>
         );

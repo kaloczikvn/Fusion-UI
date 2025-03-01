@@ -6,7 +6,7 @@
 }
 
 .soldier-entry {
-    display: inline-flex;
+    display: flex;
     width: 24.07407407407407vh; // 260px
     height: 40.74074074074074vh; // 440px
     vertical-align: top;
@@ -73,12 +73,12 @@
             right: 0;
             bottom: 0;
 
-            i {
+            svg {
                 opacity: 0.3;
             }
 
             &:hover {
-                i {
+                svg {
                     opacity: 1.0;
                 }
             }
@@ -95,11 +95,6 @@
             margin: 1.481481481481481vh; // 16px
             opacity: 0.5;
             transition: opacity 150ms ease-in-out;
-
-            i {
-                font-size: 4.62962962962963vh; // 50px
-            }
-
             &:hover {
                 opacity: 1.0;
             }
@@ -125,7 +120,6 @@
         transform: translate(0%, 0%);
         backdrop-filter: blur(1.851851851851852vh); // 20px
         will-change: top;
-
         &:before {
             display: none;
         }

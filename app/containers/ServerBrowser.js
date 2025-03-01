@@ -179,13 +179,13 @@ class ServerBrowser extends Component {
                             {mapSort}
                         </div>
                         <div className="column column-3 sort-action" onClick={this._onSortByGamemode}>
-                            <i className="sort-indicator" /><span>Gamemode</span><i className="sort-indicator material-icons">{gamemodeSort}</i>
+                            <span>Gamemode</span>{gamemodeSort}
                         </div>
                         <div className="column column-4 sort-action" onClick={this._onSortByPlayers}>
-                            <i className="sort-indicator" /><span>Players</span><i className="sort-indicator material-icons">{playersSort}</i>
+                            <span>Players</span>{playersSort}
                         </div>
                         <div className="column column-5 sort-action" onClick={this._onSortByPing}>
-                            <i className="sort-indicator" /><span>Ping</span><i className="sort-indicator material-icons">{pingSort}</i>
+                            <span>Ping</span>{pingSort}
                         </div>
                     </div>
                     <div className={listClassName} style={{ overflowX: 'hidden', width: this.state.width, height: this.state.height }} ref={this._onServerList} >
