@@ -1,126 +1,121 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import * as ActionTypes from '../constants/ActionTypes'
-import * as OriginLinkStatus from '../constants/OriginLinkStatus'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as ActionTypes from '../constants/ActionTypes';
+import * as OriginLinkStatus from '../constants/OriginLinkStatus';
 
-class OriginLink extends Component
-{
-    render()
-    {
-        let originState = 'Waiting for Origin / EA Desktop...';
-        let canRetry = false;
-        let spinning = false;
+export default function OriginLink() {
+    const base = useSelector((state) => state.base);
+    const user = useSelector((state) => state.user);
 
-        switch (this.props.user.originLinkStatus)
-        {
-            case OriginLinkStatus.IDLE:
-                originState = 'Waiting for Origin / EA Desktop...';
-                spinning = true;
-                break;
+    const dispatch = useDispatch();
 
-            case OriginLinkStatus.LINKING:
-                originState = 'Linking Account...';
-                spinning = true;
-                break;
+    const enableBlur = () => {
+        dispatch({ type: ActionTypes.SET_BLUR, blur: true });
+    };
 
-            case OriginLinkStatus.LINK_SUCCESSFUL:
-                originState = 'Successfully Linked!';
-                break;
+    const disableMenu = () => {
+        dispatch({ type: ActionTypes.SET_MENU, menu: false });
+    };
 
-            case OriginLinkStatus.CHECKING_OWNERSHIP:
-                originState = 'Checking Ownership...';
-                spinning = true;
-                break;
+    const setPopup = (popup) => {
+        dispatch({ type: ActionTypes.SET_POPUP, popup: popup });
+    };
 
-            case OriginLinkStatus.LINK_FAILED:
-                originState = 'Link Failed, Try later';
-                canRetry = true;
-                break;
+    const onSetLogin = () => {
+        dispatch({
+            type: ActionTypes.CHANGE_LOGIN_STATUS,
+            status: LoginStatus.LOGGING_IN,
+        });
+    };
 
-            case OriginLinkStatus.PRODUCT_MISSING:
-                originState = 'Your account does not own Battlefield 3';
-                canRetry = true;
-                break;
+    const onRetry = (e) => {
+        if (e) e.preventDefault();
 
-            case OriginLinkStatus.LINK_TAKEN:
-                originState = 'This EA Account is already linked to another account';
-                canRetry = true;
-                break;
+        WebUI.Call('LinkOrigin');
+    };
 
-            case OriginLinkStatus.LINK_UNAVAILABLE:
-                originState = 'Link Service Unavailable';
-                canRetry = true;
-                break;
+    useEffect(() => {
+        enableBlur();
+        disableMenu();
+        WebUI.Call('LinkOrigin');
 
-            case OriginLinkStatus.ORIGIN_ERROR:
-                originState = 'An error occurred while communicating with Origin / EA Desktop';
-                canRetry = true;
-                break;
-        }
+        return () => {
+            setPopup(null);
+        };
+    }, []);
 
-        let retryButton = canRetry ? <a href="#" className="btn border-btn" onClick={this.onRetry.bind(this)}>Retry</a> : null;
+    let originState = 'Waiting for Origin / EA Desktop...';
+    let canRetry = false;
+    let spinning = false;
 
-        return (
-            <div id="origin-link-page">
-                <div className="middle-container">
-                    <h1>Ownership Verification</h1>
-                    <p>In order to use {this.props.base.productName} we will first need to verify your game ownership through your EA account. Please launch the EA Desktop app or the Origin client on your computer and log in with your account. This is a one-time process and will link your EA account with your Venice Unleashed account.</p>
-                    <div className="status-container">
-                        <img src="/assets/img/common/origin.svg" className={spinning ? 'spinning' : ''} />
-                        <h2>{originState}</h2>
-                        {retryButton}
-                    </div>
+    switch (user.originLinkStatus) {
+        case OriginLinkStatus.IDLE:
+            originState = 'Waiting for Origin / EA Desktop...';
+            spinning = true;
+            break;
+
+        case OriginLinkStatus.LINKING:
+            originState = 'Linking Account...';
+            spinning = true;
+            break;
+
+        case OriginLinkStatus.LINK_SUCCESSFUL:
+            originState = 'Successfully Linked!';
+            break;
+
+        case OriginLinkStatus.CHECKING_OWNERSHIP:
+            originState = 'Checking Ownership...';
+            spinning = true;
+            break;
+
+        case OriginLinkStatus.LINK_FAILED:
+            originState = 'Link Failed, Try later';
+            canRetry = true;
+            break;
+
+        case OriginLinkStatus.PRODUCT_MISSING:
+            originState = 'Your account does not own Battlefield 3';
+            canRetry = true;
+            break;
+
+        case OriginLinkStatus.LINK_TAKEN:
+            originState = 'This EA Account is already linked to another account';
+            canRetry = true;
+            break;
+
+        case OriginLinkStatus.LINK_UNAVAILABLE:
+            originState = 'Link Service Unavailable';
+            canRetry = true;
+            break;
+
+        case OriginLinkStatus.ORIGIN_ERROR:
+            originState = 'An error occurred while communicating with Origin / EA Desktop';
+            canRetry = true;
+            break;
+    }
+
+    let retryButton = canRetry ? (
+        <a href="#" className="btn border-btn" onClick={onRetry}>
+            Retry
+        </a>
+    ) : null;
+
+    return (
+        <div id="origin-link-page">
+            <div className="middle-container">
+                <h1>Ownership Verification</h1>
+                <p>
+                    In order to use {base.productName} we will first need to verify your game ownership through your EA
+                    account. Please launch the EA Desktop app or the Origin client on your computer and log in with your
+                    account. This is a one-time process and will link your EA account with your Venice Unleashed
+                    account.
+                </p>
+                <div className="status-container">
+                    <img src="/assets/img/common/origin.svg" className={spinning ? 'spinning' : ''} />
+                    <h2>{originState}</h2>
+                    {retryButton}
                 </div>
             </div>
-        );
-    }
-
-    componentDidMount()
-    {
-        this.props.enableBlur();
-        this.props.disableMenu();
-
-        WebUI.Call('LinkOrigin');
-    }
-
-    componentWillUnmount()
-    {
-        this.props.setPopup(null);
-    }
-
-    onRetry(e)
-    {
-        if (e)
-            e.preventDefault();
-
-        WebUI.Call('LinkOrigin');
-    }
+        </div>
+    );
 }
-
-const mapStateToProps = (state) => {
-    return {
-        base: state.base,
-        user: state.user
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        enableBlur: () => {
-            dispatch({ type: ActionTypes.SET_BLUR, blur: true })
-        },
-        disableMenu: () => {
-            dispatch({ type: ActionTypes.SET_MENU, menu: false })
-        },
-        setPopup: (popup) => {
-            dispatch({ type: ActionTypes.SET_POPUP, popup: popup })
-        },
-        onSetLogin: () => {
-            dispatch({ type: ActionTypes.CHANGE_LOGIN_STATUS, status: LoginStatus.LOGGING_IN })
-        }
-    };
-};
-
-export default connect(
-    mapStateToProps, mapDispatchToProps
-)(OriginLink);

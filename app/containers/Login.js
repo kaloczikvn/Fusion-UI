@@ -1,145 +1,150 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import * as ActionTypes from '../constants/ActionTypes'
-import * as LoginStatus from '../constants/LoginStatus'
+import React, { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import * as ActionTypes from '../constants/ActionTypes';
+import * as LoginStatus from '../constants/LoginStatus';
 
-import LoginPopup from '../popups/LoginPopup'
+import LoginPopup from '../popups/LoginPopup';
 
-class Login extends Component
-{
-    constructor(props)
-    {
-        super(props);
+export default function Login() {
+    const [capsLock, setCapsLock] = useState(false);
 
-        this.state = {
-            capsLock: false,
-        };
-    }
+    const base = useSelector((state) => state.base);
+    const user = useSelector((state) => state.user);
 
-    render()
-    {
-        let capsLockNoticeClass = 'capslock-notice';
+    const dispatch = useDispatch();
 
-        if (this.state.capsLock) {
-            capsLockNoticeClass += ' on';
-        }
+    const usernameRef = useRef(null);
+    const passwordRef = useRef(null);
+    const rememberRef = useRef(null);
 
-        return (
-            <div id="login-page">
-                <form onSubmit={this.onSubmit.bind(this)}>
-                    <img src="/assets/img/logo.svg" />
-                    
-                    <label htmlFor="username">Username</label><br/>
-                    <div className="field-container">
-                        <input type="text" ref="username" key="username" id="username" /><br/>
-                    </div>
-                    <label htmlFor="password">Password</label><br/>
-                    <div className="field-container">
-                        <input type="password" ref="password" key="password" id="password" onKeyDown={this.onUpdateCapsLock} onKeyUp={this.onUpdateCapsLock} onMouseDown={this.onUpdateCapsLock} /><br/>
-                    </div>
-                    <div className={capsLockNoticeClass}><strong>WARNING</strong>&nbsp;&nbsp;Caps Lock is on.</div>
-                    <a href="#" className="btn border-btn primary" onClick={this.onSubmit.bind(this)}>Login</a>
-                    <a href="#" className="btn border-btn" onClick={this.onSignUp.bind(this)}>Sign Up</a>
-                    <div className="login-actions">
-                        <div className="left-actions">
-                            <label>Remember Me <input type="checkbox" name="remember" value="yes" ref="remember" /></label>
-                        </div>
-                        <div className="right-actions">
-                            <a href="#" onClick={this.onForgotPassword.bind(this)}>Forgot Password</a>
-                        </div>
-                    </div>
-                    <input type="submit" style={{ position: 'absolute', opacity: 0.0, left: '-999999999px' }}/>
-                </form>
-            </div>
-        );
-    }
+    const enableBlur = () => {
+        dispatch({ type: ActionTypes.SET_BLUR, blur: true });
+    };
 
-    onUpdateCapsLock = (e) =>
-    {
-        const capsLock = e.getModifierState('CapsLock');
+    const disableMenu = () => {
+        dispatch({ type: ActionTypes.SET_MENU, menu: false });
+    };
 
-        this.setState({
-            capsLock,
+    const setPopup = (popup) => {
+        dispatch({ type: ActionTypes.SET_POPUP, popup: popup });
+    };
+
+    const onSetLogin = () => {
+        dispatch({
+            type: ActionTypes.CHANGE_LOGIN_STATUS,
+            status: LoginStatus.LOGGING_IN,
         });
     };
 
-    componentDidMount()
-    {
-        this.props.enableBlur();
-        this.props.disableMenu();
+    const onUpdateCapsLock = (e) => {
+        const capsLockState = e.getModifierState('CapsLock');
+        setCapsLock(capsLockState);
+    };
 
-        if (this.props.user.loginData !== null)
-        {
-            this.props.onSetLogin();
-            this.props.setPopup(<LoginPopup />);
-
-            WebUI.Call('Login', this.props.user.loginData.username, this.props.user.loginData.password, false);
-        }
-        else if (this.props.user.loginToken !== null)
-        {
-            this.props.onSetLogin();
-            this.props.setPopup(<LoginPopup />);
-
-            WebUI.Call('TokenLogin', this.props.user.loginToken.token);
-        }
-    }
-
-    componentWillUnmount()
-    {
-        this.props.setPopup(null);
-    }
-
-    onForgotPassword(e)
-    {
-        if (e)
-            e.preventDefault();
+    const onForgotPassword = (e) => {
+        if (e) e.preventDefault();
 
         WebUI.Call('Forgot');
-    }
+    };
 
-    onSubmit(e)
-    {
+    const onSubmit = (e) => {
         e.preventDefault();
 
-        this.props.onSetLogin();
-        this.props.setPopup(<LoginPopup />);
+        onSetLogin();
+        setPopup(<LoginPopup />);
 
         // TODO: Fix checkbox...
-        // WebUI.Call('Login', this.refs.username.value, this.refs.password.value, this.refs.remember.checked);
-        WebUI.Call('Login', this.refs.username.value, this.refs.password.value, true);
-    }
+        // WebUI.Call('Login', usernameRef.current.value, passwordRef.current.value, rememberRef.current.checked);
+        WebUI.Call('Login', usernameRef.current.value, passwordRef.current.value, true);
+    };
 
-    onSignUp(e)
-    {
+    const onSignUp = (e) => {
         e.preventDefault();
         WebUI.Call('Signup');
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        base: state.base,
-        user: state.user
     };
-};
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        enableBlur: () => {
-            dispatch({ type: ActionTypes.SET_BLUR, blur: true })
-        },
-        disableMenu: () => {
-            dispatch({ type: ActionTypes.SET_MENU, menu: false })
-        },
-        setPopup: (popup) => {
-            dispatch({ type: ActionTypes.SET_POPUP, popup: popup })
-        },
-        onSetLogin: () => {
-            dispatch({ type: ActionTypes.CHANGE_LOGIN_STATUS, status: LoginStatus.LOGGING_IN })
+    useEffect(() => {
+        enableBlur();
+        disableMenu();
+
+        if (user.loginData !== null) {
+            onSetLogin();
+            setPopup(<LoginPopup />);
+
+            WebUI.Call('Login', user.loginData.username, user.loginData.password, false);
+        } else if (user.loginToken !== null) {
+            onSetLogin();
+            setPopup(<LoginPopup />);
+
+            WebUI.Call('TokenLogin', user.loginToken.token);
         }
-    };
-};
 
-export default connect(
-    mapStateToProps, mapDispatchToProps
-)(Login);
+        return () => {
+            setPopup(null);
+        };
+    }, []);
+
+    let capsLockNoticeClass = 'capslock-notice';
+
+    if (capsLock) {
+        capsLockNoticeClass += ' on';
+    }
+
+    return (
+        <div id="login-page">
+            <form onSubmit={onSubmit}>
+                <img src="/assets/img/logo.svg" />
+
+                <label htmlFor="username">Username</label>
+                <br />
+                <div className="field-container">
+                    <input type="text" ref={usernameRef} key="username" id="username" />
+                    <br />
+                </div>
+                <label htmlFor="password">Password</label>
+                <br />
+                <div className="field-container">
+                    <input
+                        type="password"
+                        ref={passwordRef}
+                        key="password"
+                        id="password"
+                        onKeyDown={onUpdateCapsLock}
+                        onKeyUp={onUpdateCapsLock}
+                        onMouseDown={onUpdateCapsLock}
+                    />
+                    <br />
+                </div>
+                <div className={capsLockNoticeClass}>
+                    <strong>WARNING</strong>&nbsp;&nbsp;Caps Lock is on.
+                </div>
+                <a href="#" className="btn border-btn primary" onClick={onSubmit}>
+                    Login
+                </a>
+                <a href="#" className="btn border-btn" onClick={onSignUp}>
+                    Sign Up
+                </a>
+                <div className="login-actions">
+                    <div className="left-actions">
+                        <label>
+                            Remember Me <input type="checkbox" name="remember" value="yes" ref={rememberRef} />
+                        </label>
+                    </div>
+                    <div className="right-actions">
+                        <a href="#" onClick={onForgotPassword}>
+                            Forgot Password
+                        </a>
+                    </div>
+                </div>
+                <input
+                    type="submit"
+                    style={{
+                        position: 'absolute',
+                        opacity: 0.0,
+                        left: '-999999999px',
+                    }}
+                />
+            </form>
+        </div>
+    );
+}
