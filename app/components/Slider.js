@@ -1,48 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Slider from 'rc-slider';
 
-export default class SliderInput extends Component
-{
-    render()
-    {
-        let className = 'slider-input';
+export default function SliderInput({ className, value, onChange }) {
+    let sliderClassName = 'slider-input';
 
-        if (this.props.className)
-            className += ' ' + this.props.className;
+    if (className) sliderClassName += ' ' + className;
 
-        return (
-            <div className={className}>
-                <input className="slider-value" type="text" maxLength={3} onChange={this._onInputChange} value={Math.round(this.props.value * 100)} />
-                <Slider onChange={this._onSliderChange} value={this.props.value * 100} />
-            </div>
-        );
-    }
-
-    _onSliderChange = (value) =>
-    {
-        this.props.onChange(value / 100.0);
+    const onSliderChange = (sliderValue) => {
+        onChange(sliderValue / 100.0);
     };
 
-    _onInputChange = (e) =>
-    {
+    const onInputChange = (e) => {
         // Make sure to only allow numbers.
-        if (e.target.value.length > 0 && !e.target.value.match(/[0-9]+/g))
-        {
+        if (e.target.value.length > 0 && !e.target.value.match(/[0-9]+/g)) {
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
             return;
         }
 
-        if (e.target.value.length === 0)
-            e.target.value = '0';
+        if (e.target.value.length === 0) e.target.value = '0';
 
-        let value = parseInt(e.target.value, 10);
+        let inputValue = parseInt(e.target.value, 10);
 
-        if (value > 100)
-        {
+        if (inputValue > 100) {
             e.target.value = '100';
-            value = 100;
+            inputValue = 100;
         }
 
-        this.props.onChange(value / 100.0);
+        onChange(inputValue / 100.0);
     };
+
+    return (
+        <div className={sliderClassName}>
+            <input
+                className="slider-value"
+                type="text"
+                maxLength={3}
+                onChange={onInputChange}
+                value={Math.round(value * 100)}
+            />
+            <Slider onChange={onSliderChange} value={value * 100} />
+        </div>
+    );
 }

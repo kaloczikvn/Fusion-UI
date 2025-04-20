@@ -12,25 +12,19 @@ import ServerBrowser from '../containers/ServerBrowser';
 import Credits from '../containers/Credits';
 import Settings from '../containers/Settings';
 
-export default class ClientRenderer extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <Router history={hashHistory}>
-                <Route path="/" component={App}>
-                    <Route path="login" component={Login} />
-                    <Route path="connection" component={Connection} />
-                    <Route path="origin-link" component={OriginLink} />
-                    <Route path="players" component={Players} />
-                    <Route path="main-menu" component={MainMenu} />
-                    <Route path="server-browser" component={ServerBrowser} />
-                    <Route path="credits" component={Credits} />
-                    <Route path="settings" component={Settings} />
-                </Route>
-            </Router>
-        );
-    }
+export default function ClientRenderer() {
+    return (
+        <Router history={hashHistory}>
+            <Route path="/" component={App}>
+                <Route path="login" component={Login} />
+                <Route path="connection" component={Connection} />
+                <Route path="origin-link" component={OriginLink} />
+                <Route path="players" component={Players} />
+                <Route path="main-menu" component={MainMenu} />
+                <Route path="server-browser" component={ServerBrowser} />
+                <Route path="credits" component={Credits} />
+                <Route path="settings" component={Settings} />
+            </Route>
+        </Router>
+    );
 }

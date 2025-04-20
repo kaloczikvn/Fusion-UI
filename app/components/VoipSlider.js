@@ -1,50 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Slider from 'rc-slider';
 
-export default class VoipSlider extends Component
-{
-    render()
-    {
-        let volumeClassName = 'voip-volume';
+export default function VoipSlider({ value, volume, onChange }) {
+    let volumeClassName = 'voip-volume';
 
-        if (this.props.volume >= this.props.value)
-            volumeClassName += ' active';
+    if (volume >= value) volumeClassName += ' active';
 
-        return (
-            <div className="slider-input voip-slider">
-                <input className="slider-value" type="text" maxLength={3} onChange={this._onInputChange} value={Math.round(this.props.value * 100)} />
-                <Slider onChange={this._onSliderChange} value={this.props.value * 100}>
-                    <div className={volumeClassName} style={{ width: (this.props.volume * 100.0) + '%' }} />
-                </Slider>
-            </div>
-        );
-    }
-
-    _onSliderChange = (value) =>
-    {
-        this.props.onChange(value / 100.0);
+    const onSliderChange = (sliderValue) => {
+        onChange(sliderValue / 100.0);
     };
 
-    _onInputChange = (e) =>
-    {
+    const onInputChange = (e) => {
         // Make sure to only allow numbers.
-        if (e.target.value.length > 0 && !e.target.value.match(/[0-9]+/g))
-        {
+        if (e.target.value.length > 0 && !e.target.value.match(/[0-9]+/g)) {
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
             return;
         }
 
-        if (e.target.value.length === 0)
-            e.target.value = '0';
+        if (e.target.value.length === 0) e.target.value = '0';
 
-        let value = parseInt(e.target.value, 10);
+        let inputValue = parseInt(e.target.value, 10);
 
-        if (value > 100)
-        {
+        if (inputValue > 100) {
             e.target.value = '100';
-            value = 100;
+            inputValue = 100;
         }
 
-        this.props.onChange(value / 100.0);
+        onChange(inputValue / 100.0);
     };
+
+    return (
+        <div className="slider-input voip-slider">
+            <input
+                className="slider-value"
+                type="text"
+                maxLength={3}
+                onChange={onInputChange}
+                value={Math.round(value * 100)}
+            />
+            <Slider onChange={onSliderChange} value={value * 100}>
+                <div className={volumeClassName} style={{ width: volume * 100.0 + '%' }} />
+            </Slider>
+        </div>
+    );
 }

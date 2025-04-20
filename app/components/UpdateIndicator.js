@@ -1,62 +1,34 @@
-import React, { Component } from 'react';
-import LoadingIndicator from "./LoadingIndicator";
-import ProgressIndicator from "./ProgressIndicator";
-import {connect} from "react-redux";
-import * as UpdateState from '../constants/UpdateState'
-import * as UpdateError from '../constants/UpdateError'
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-class UpdateIndicator extends Component
-{
-    render()
-    {
-        switch (this.props.update.state)
-        {
-            case UpdateState.IDLE:
-            {
-                if (this.props.update.error !== UpdateError.NONE)
-                    return this.renderError();
+import * as UpdateError from '../constants/UpdateError';
+import * as UpdateState from '../constants/UpdateState';
 
-                return this.renderEmpty();
-            }
+import LoadingIndicator from './LoadingIndicator';
+import ProgressIndicator from './ProgressIndicator';
 
-            case UpdateState.CHECKING_FOR_UPDATES:
-            case UpdateState.DOWNLOADING_FILE_LIST:
-                return this.renderChecking();
+export default function UpdateIndicator() {
+    const update = useSelector((state) => state.update);
 
-            case UpdateState.UPDATING:
-                return this.renderUpdating();
+    const renderEmpty = () => {
+        return <div />;
+    };
 
-            case UpdateState.DONE_UPDATING:
-                return this.renderUpdated();
-
-            default:
-                return this.renderEmpty();
-        }
-    }
-
-    renderEmpty()
-    {
-        return <div/>;
-    }
-
-    renderChecking()
-    {
+    const renderChecking = () => {
         return (
             <div className="update-indicator">
                 <div className="update-indicator-container">
                     <span>Starting Update</span>
-                    <LoadingIndicator/>
+                    <LoadingIndicator />
                 </div>
             </div>
         );
-    }
+    };
 
-    renderUpdating()
-    {
-        const percentage = Math.round(this.props.update.percentage * 100.0);
+    const renderUpdating = () => {
+        const percentage = Math.round(update.percentage * 100.0);
 
-        if (percentage >= 99.9)
-        {
+        if (percentage >= 99.9) {
             return (
                 <div className="update-indicator">
                     <div className="update-indicator-container">
@@ -71,14 +43,13 @@ class UpdateIndicator extends Component
             <div className="update-indicator">
                 <div className="update-indicator-container">
                     <span>Updating {percentage}%</span>
-                    <ProgressIndicator percentage={this.props.update.percentage * 100.0} />
+                    <ProgressIndicator percentage={update.percentage * 100.0} />
                 </div>
             </div>
         );
-    }
+    };
 
-    renderUpdated()
-    {
+    const renderUpdated = () => {
         return (
             <div className="update-indicator updated">
                 <div className="update-indicator-container">
@@ -87,14 +58,12 @@ class UpdateIndicator extends Component
                 </div>
             </div>
         );
-    }
+    };
 
-    renderError()
-    {
+    const renderError = () => {
         let errorText = 'Update Error';
 
-        switch (this.props.update.error)
-        {
+        switch (update.error) {
             case UpdateError.ACCESS_ERROR:
                 errorText = 'Access Error';
                 break;
@@ -113,13 +82,26 @@ class UpdateIndicator extends Component
                 </div>
             </div>
         );
+    };
+
+    switch (update.state) {
+        case UpdateState.IDLE: {
+            if (update.error !== UpdateError.NONE) return renderError();
+
+            return renderEmpty();
+        }
+
+        case UpdateState.CHECKING_FOR_UPDATES:
+        case UpdateState.DOWNLOADING_FILE_LIST:
+            return renderChecking();
+
+        case UpdateState.UPDATING:
+            return renderUpdating();
+
+        case UpdateState.DONE_UPDATING:
+            return renderUpdated();
+
+        default:
+            return renderEmpty();
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        update: state.update,
-    };
-};
-
-export default connect(mapStateToProps)(UpdateIndicator);

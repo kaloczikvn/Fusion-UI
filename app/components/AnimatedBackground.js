@@ -1,84 +1,63 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-export default class AnimatedBackground extends Component
-{
-    constructor(props)
-    {
-        super(props);
+export default function AnimatedBackground() {
+    const canvasRef = useRef(null);
+    const shouldRenderRef = useRef(false);
+    const imgRef = useRef(null);
+    const iterationRef = useRef(0);
+    const totalIterations = 800;
 
-        this.shouldRender = false;
-        this.img = null;
+    useEffect(() => {
+        shouldRenderRef.current = true;
 
-        this.iteration = 0;
-        this.totalIterations = 800;
-    }
-
-    render()
-    {
-        return (
-            <canvas ref="finalCanvas" id="animated-background">
-            </canvas>
-        );
-    }
-
-    componentDidMount()
-    {
-        this.shouldRender = true;
-
-
-        this.img = new Image();
-        this.img.onload = () =>
-        {
-            window.requestAnimationFrame(() => this.onRender());
+        imgRef.current = new Image();
+        imgRef.current.onload = () => {
+            window.requestAnimationFrame(() => onRender());
         };
 
-        this.img.src = '/assets/img/background.png';
-    }
+        imgRef.current.src = '/assets/img/background.png';
 
-    componentWillUnmount()
-    {
-        this.shouldRender = false;
-    }
+        return () => {
+            shouldRenderRef.current = false;
+        };
+    }, []);
 
-    onRender()
-    {
-        if (!this.shouldRender)
-            return;
+    const easeInOutCubic = (time, duration, valueStart, valueEnd) => {
+        return (-valueEnd / 2) * (Math.cos((Math.PI * time) / duration) - 1) + valueStart;
+    };
+
+    const onRender = () => {
+        if (!shouldRenderRef.current) return;
 
         let width = document.body.offsetWidth;
         let height = document.body.offsetHeight;
 
         // Paint the blur regions in our final canvas.
-        let finalCanvas = this.refs.finalCanvas;
+        let finalCanvas = canvasRef.current;
         let finalContext = finalCanvas.getContext('2d');
 
-        if (finalCanvas.width != width)
-            finalCanvas.width = width;
+        if (finalCanvas.width != width) finalCanvas.width = width;
 
-        if (finalCanvas.height != height)
-            finalCanvas.height = height;
+        if (finalCanvas.height != height) finalCanvas.height = height;
 
-        let imgRatio = this.img.width / this.img.height;
+        let imgRatio = imgRef.current.width / imgRef.current.height;
         let viewportRatio = width / height;
 
-        let finalWidth = this.img.width;
-        let finalHeight = this.img.height;
+        let finalWidth = imgRef.current.width;
+        let finalHeight = imgRef.current.height;
         let imgTop = 0;
         let imgLeft = 0;
 
-        if (viewportRatio > imgRatio)
-        {
+        if (viewportRatio > imgRatio) {
             // Scale based on width.
-            let scaleRatio = (width * 1.3) / this.img.width;
+            let scaleRatio = (width * 1.3) / imgRef.current.width;
             finalWidth *= scaleRatio;
             finalHeight *= scaleRatio;
 
             imgTop = -(finalHeight - height) / 2.0;
-        }
-        else
-        {
+        } else {
             // Scale based on height.
-            let scaleRatio = (height * 1.3) / this.img.height;
+            let scaleRatio = (height * 1.3) / imgRef.current.height;
             finalWidth *= scaleRatio;
             finalHeight *= scaleRatio;
 
@@ -96,29 +75,21 @@ export default class AnimatedBackground extends Component
         var yStart = -0.0925925925925926 * height; // -100px
         var yEnd = yStart + yStep;
 
-        if (this.iteration >= this.totalIterations)
-        {
-            xOffset = this.easeInOutCubic(this.iteration - this.totalIterations, this.totalIterations, xEnd, -xStep);
-            yOffset = this.easeInOutCubic(this.iteration - this.totalIterations, this.totalIterations, yEnd, -yStep);
-        }
-        else
-        {
-            xOffset = this.easeInOutCubic(this.iteration, this.totalIterations, xStart, xStep);
-            yOffset = this.easeInOutCubic(this.iteration, this.totalIterations, yStart, yStep);
+        if (iterationRef.current >= totalIterations) {
+            xOffset = easeInOutCubic(iterationRef.current - totalIterations, totalIterations, xEnd, -xStep);
+            yOffset = easeInOutCubic(iterationRef.current - totalIterations, totalIterations, yEnd, -yStep);
+        } else {
+            xOffset = easeInOutCubic(iterationRef.current, totalIterations, xStart, xStep);
+            yOffset = easeInOutCubic(iterationRef.current, totalIterations, yStart, yStep);
         }
 
-        finalContext.drawImage(this.img, imgLeft + xOffset, imgTop + yOffset, finalWidth, finalHeight);
+        finalContext.drawImage(imgRef.current, imgLeft + xOffset, imgTop + yOffset, finalWidth, finalHeight);
 
-        if (this.iteration > this.totalIterations * 2)
-            this.iteration = 0;
-        else
-            this.iteration += 0.5;
+        if (iterationRef.current > totalIterations * 2) iterationRef.current = 0;
+        else iterationRef.current += 0.5;
 
-        window.requestAnimationFrame(() => this.onRender());
-    }
+        window.requestAnimationFrame(() => onRender());
+    };
 
-    easeInOutCubic(time, duration, valueStart, valueEnd)
-    {
-        return -valueEnd/2 * (Math.cos(Math.PI*time/duration) - 1) + valueStart;
-    }
+    return <canvas ref={canvasRef} id="animated-background"></canvas>;
 }

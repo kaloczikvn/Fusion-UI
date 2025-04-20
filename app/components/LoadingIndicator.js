@@ -1,42 +1,17 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default class LoadingIndicator extends Component
-{
-    constructor(props)
-    {
-        super(props);
+export default function LoadingIndicator() {
+    const [style, setStyle] = useState({});
 
-        this.timeout = null;
-
-        this.state = {
-            style: {}
-        };
-    }
-
-    componentDidMount()
-    {
-        this.timeout = setTimeout(() => {
-            this.timeout = null;
-
-            this.setState({
-                style: { borderRadius: "52%" }
-            });
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setStyle({ borderRadius: '52%' });
         }, 150);
-    }
 
-    componentWillUnmount()
-    {
-        if (this.timeout === null)
-            return;
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, []);
 
-        clearTimeout(this.timeout);
-        this.timeout = null;
-    }
-
-    render()
-    {
-        return (
-            <i className="loading-indicator" style={this.state.style} />
-        );
-    }
+    return <i className="loading-indicator" style={style} />;
 }

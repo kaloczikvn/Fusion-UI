@@ -1,52 +1,39 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import * as LoginStatus from "../constants/LoginStatus";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import * as LoginStatus from '../constants/LoginStatus';
 
 import ExitToAppIcon from './icons/ExitToAppIcon';
 import PowerSettingsNewIcon from './icons/PowerSettingsNewIcon';
 
-class TopLeftActions extends Component
-{
-    render()
-    {
-        let logoutBtn = null;
+export default function TopLeftActions({ onQuit, onLogoutQuit }) {
+    const user = useSelector((state) => state.user);
 
-        if (this.props.user.loginStatus === LoginStatus.LOGGED_IN)
-            logoutBtn = <li><a href="#" onClick={this.onLogout.bind(this)}><ExitToAppIcon /></a></li>;
+    const handleQuit = (e) => {
+        if (e) e.preventDefault();
 
-        return (
-            <ul className="top-actions left">
-                <li><a href="#" onClick={this.onQuit.bind(this)}><PowerSettingsNewIcon /></a></li>
-                {logoutBtn}
-            </ul>
-        );
-    }
-
-    onQuit(e)
-    {
-        if (e)
-            e.preventDefault();
-
-        if (this.props.onQuit)
-            this.props.onQuit();
-    }
-
-    onLogout(e)
-    {
-        if (e)
-            e.preventDefault();
-
-        if (this.props.onLogoutQuit)
-            this.props.onLogoutQuit();
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        user: state.user
+        if (onQuit) onQuit();
     };
-};
 
-export default connect(
-    mapStateToProps
-)(TopLeftActions);
+    const handleLogout = (e) => {
+        if (e) e.preventDefault();
+
+        if (onLogoutQuit) onLogoutQuit();
+    };
+
+    return (
+        <ul className="top-actions left">
+            <li>
+                <a href="#" onClick={handleQuit}>
+                    <PowerSettingsNewIcon />
+                </a>
+            </li>
+            {user.loginStatus === LoginStatus.LOGGED_IN && (
+                <li>
+                    <a href="#" onClick={handleLogout}>
+                        <ExitToAppIcon />
+                    </a>
+                </li>
+            )}
+        </ul>
+    );
+}
