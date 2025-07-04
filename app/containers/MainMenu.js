@@ -59,7 +59,11 @@ export default function MainMenu() {
     return (
         <div className="main-menu content-wrapper">
             <div className="main-container left">
-                <a className="news-item" href={newsLeft.link} onClick={(e) => openNewsLink(newsLeft.link, e)}>
+                <a className="news-item" href={newsLeft.link} onClick={(e) => openNewsLink(newsLeft.link, e)}
+                    style={{
+                        background: 'linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,1.0) 100%), url("/assets/img/news-bg.png") no-repeat center center',
+                        backgroundSize: '100% 100%'
+                    }}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height="86px"
@@ -80,6 +84,10 @@ export default function MainMenu() {
                     className="news-item secondary"
                     href={newsRight.link}
                     onClick={(e) => openNewsLink(newsRight.link, e)}
+                    style={{
+                        background: "linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,1.0) 100%), url('/assets/img/news-secondary-bg.png') no-repeat center center",
+                        backgroundSize: '100% 100%'
+                    }}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
