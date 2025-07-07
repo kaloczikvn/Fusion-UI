@@ -70,7 +70,7 @@ export const SELECT_STYLE = {
         ...provided,
         width: '0.1574074074074074vh', // 1.7px
         marginTop: '0.7407407407407407vh', // 8px
-        marginBottom: '0.7407407407407407vh', // 8px
+        marginBottom: '0.7407407407407407vh' // 8px
     }),
     valueContainer: (provided) => ({
         ...provided,

@@ -3,6 +3,7 @@ import Select from 'react-select';
 import ServerEntry from "./ServerEntry";
 import * as ActionTypes from "../constants/ActionTypes";
 import { connect } from "react-redux";
+import CustomCheckbox from './../components/inputs/Checkbox';
 
 class ServerFilters extends Component {
     constructor(props) {
@@ -74,6 +75,7 @@ class ServerFilters extends Component {
                 svg: {
                     height: '1.851851851851852vh', // 20px
                     width: '1.851851851851852vh', // 20px
+                    fill: 'rgb(204, 204, 204)'
                 },
             }),
             indicatorSeparator: (provided) => ({
@@ -81,6 +83,7 @@ class ServerFilters extends Component {
                 width: '0.1574074074074074vh', // 1.7px
                 marginTop: '0.7407407407407407vh', // 8px
                 marginBottom: '0.7407407407407407vh', // 8px
+                background: 'rgb(204, 204, 204)'
             }),
             valueContainer: (provided) => ({
                 ...provided,
@@ -108,6 +111,7 @@ class ServerFilters extends Component {
                 svg: {
                     width: '1.296296296296296vh', // 14px
                     height: '1.296296296296296vh', // 14px
+                    fill: 'rgb(204, 204, 204)'
                 }
             }),
             clearIndicator: (provided) => ({
@@ -116,6 +120,7 @@ class ServerFilters extends Component {
                 svg: {
                     width: '1.851851851851852vh', // 20px
                     height: '1.851851851851852vh', // 20px
+                    fill: 'rgb(204, 204, 204)'
                 }
             }),
             input: (provided) => ({
@@ -127,6 +132,12 @@ class ServerFilters extends Component {
                 ...provided,
                 padding: '0.7407407407407407vh 1.111111111111111vh', // 8px 12px,
                 fontSize: '1.851851851851852vh', // 20px
+            }),
+            placeholder: (provided)=> ({
+                ...provided,
+                marginLeft: '10px',
+                color: '#808080',
+                textTransform: 'uppercase'
             })
         };
 
@@ -199,7 +210,7 @@ class ServerFilters extends Component {
         return (
             <div className={className}>
                 <div className="filter">
-                    <h3>Maps</h3>
+                    <h3 style={{marginBottom: '5px'}}>Maps</h3>
                     <Select
                         options={mapOptions}
                         isSearchable={true}
@@ -211,7 +222,7 @@ class ServerFilters extends Component {
                     />
                 </div>
                 <div className="filter">
-                    <h3>Gamemodes</h3>
+                    <h3 style={{marginBottom: '5px'}}>Gamemodes</h3>
                     <Select
                         options={gamemodeOptions}
                         isSearchable={true}
@@ -223,7 +234,7 @@ class ServerFilters extends Component {
                     />
                 </div>
                 <div className="filter">
-                    <h3>Tags</h3>
+                    <h3 style={{marginBottom: '5px'}}>Tags</h3>
                     <Select
                         options={tagOptions}
                         isSearchable={true}
@@ -237,48 +248,68 @@ class ServerFilters extends Component {
                 <div className="left-right-flex">
                     <div className="left">
                         <div className="filter">
-                            <h3>Server name</h3>
+                            <h3 style={{marginBottom: '5px'}}>Server name</h3>
                             <input type="text" value={this.state.serverName} onChange={this._onChangeServerName} onKeyDown={this._onKeyDown} />
                         </div>
                         <div className="filter">
-                            <h3>Player count</h3>
+                            <h3 style={{marginBottom: '5px'}}>Player count</h3>
+                            
                             <div className="min-max-ctr">
-                                <label>Min<input type="text" value={this.state.minPlayers} onChange={this._onChangeMinPlayers} onKeyDown={this._onKeyDown} /></label>
-                                <label>Max<input type="text" value={this.state.maxPlayers} onChange={this._onChangeMaxPlayers} onKeyDown={this._onKeyDown} /></label>
+                                <label style={{ display: 'flex', alignItems: 'center'}}>Min<input type="text" value={this.state.minPlayers} onChange={this._onChangeMinPlayers} onKeyDown={this._onKeyDown} /></label>
+                                <label style={{ display: 'flex', alignItems: 'center'}}>Max<input type="text" value={this.state.maxPlayers} onChange={this._onChangeMaxPlayers} onKeyDown={this._onKeyDown} /></label>
                             </div>
                         </div>
                         <div className="filter">
-                            <h3>Ping</h3>
+                            <h3 style={{marginBottom: '5px'}}>Ping</h3>
                             <div className="min-max-ctr">
-                                <label>Min<input type="text" value={this.state.minPing} onChange={this._onChangeMinPing} onKeyDown={this._onKeyDown} /></label>
-                                <label>Max<input type="text" value={this.state.maxPing} onChange={this._onChangeMaxPing} onKeyDown={this._onKeyDown} /></label>
+                                <label style={{ display: 'flex', alignItems: 'center'}}>Min<input type="text" value={this.state.minPing} onChange={this._onChangeMinPing} onKeyDown={this._onKeyDown} /></label>
+                                <label style={{ display: 'flex', alignItems: 'center'}}>Max<input type="text" value={this.state.maxPing} onChange={this._onChangeMaxPing} onKeyDown={this._onKeyDown} /></label>
                             </div>
                         </div>
                     </div>
                     <div className="right">
                         <div className="filter">
-                            <h3>Server frequency</h3>
+                            <h3 style={{marginBottom: '5px'}}>Server frequency</h3>
                             <div className="frequency-filters">
-                                <label>
-                                    <input type="checkbox" checked={this.state.freq30Hz} onChange={this._onChangeFreq30Hz} />
-                                    30Hz
-                                </label>
-                                <label>
-                                    <input type="checkbox" checked={this.state.freq60Hz} onChange={this._onChangeFreq60Hz} />
-                                    60Hz
-                                </label>
-                                <label>
-                                    <input type="checkbox" checked={this.state.freq120Hz} onChange={this._onChangeFreq120Hz} />
-                                    120Hz
-                                </label>
+                                <CustomCheckbox
+                                    label="30Hz"
+                                    checked={this.state.freq30Hz}
+                                    onChange={this._onChangeFreq30Hz}
+                                />
+                                <CustomCheckbox
+                                    label="60Hz"
+                                    checked={this.state.freq60Hz}
+                                    onChange={this._onChangeFreq60Hz}
+                                />
+                                <CustomCheckbox
+                                    label="120Hz"
+                                    checked={this.state.freq120Hz}
+                                    onChange={this._onChangeFreq120Hz}
+                                />
                             </div>
                         </div>
                         <div className="filter">
-                            <h3>Visibility filters</h3>
-                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideFull} onChange={this._onChangeHideFull} /> Hide full servers</label>
-                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideEmpty} onChange={this._onChangeHideEmpty} /> Hide empty servers</label>
-                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hidePassworded} onChange={this._onChangeHidePassworded} /> Hide password protected</label>
-                            <label className="filter-checkbox"><input type="checkbox" checked={this.state.hideIncompatible} onChange={this._onChangeHideIncompatible} /> Hide incompatible servers</label>
+                            <h3 style={{marginBottom: '5px'}}>Visibility filters</h3>
+                            <CustomCheckbox
+                                label="Hide FULL SERVERS"
+                                checked={this.state.hideFull}
+                                onChange={this._onChangeHideFull}
+                            />
+                            <CustomCheckbox
+                                label="Hide EMPTY SERVERS"
+                                checked={this.state.hideEmpty}
+                                onChange={this._onChangeHideEmpty}
+                            />
+                            <CustomCheckbox
+                                label="HIDE PASSWORD PROTECTED"
+                                checked={this.state.hidePassworded}
+                                onChange={this._onChangeHidePassworded}
+                            />
+                            <CustomCheckbox
+                                label="HIDE INCOMPATIBLE SERVERS"
+                                checked={this.state.hideIncompatible}
+                                onChange={this._onChangeHideIncompatible}
+                            />
                         </div>
                     </div>
                 </div>
@@ -449,43 +480,43 @@ class ServerFilters extends Component {
 
     _onChangeFreq30Hz = (e) => {
         this.setState({
-            freq30Hz: e.target.checked,
+            freq30Hz: e,
         })
     };
 
     _onChangeFreq60Hz = (e) => {
         this.setState({
-            freq60Hz: e.target.checked,
+            freq60Hz: e,
         })
     };
 
     _onChangeFreq120Hz = (e) => {
         this.setState({
-            freq120Hz: e.target.checked,
+            freq120Hz: e,
         })
     };
 
     _onChangeHideFull = (e) => {
         this.setState({
-            hideFull: e.target.checked,
+            hideFull: e,
         })
     };
 
     _onChangeHideEmpty = (e) => {
         this.setState({
-            hideEmpty: e.target.checked,
+            hideEmpty: e,
         })
     };
 
     _onChangeHidePassworded = (e) => {
         this.setState({
-            hidePassworded: e.target.checked,
+            hidePassworded: e,
         })
     };
 
     _onChangeHideIncompatible = (e) => {
         this.setState({
-            hideIncompatible: e.target.checked,
+            hideIncompatible: e,
         })
     };
 

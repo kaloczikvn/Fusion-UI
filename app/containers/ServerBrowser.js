@@ -239,7 +239,9 @@ export default function ServerBrowser() {
         requiredHeight -= parseFloat(headerStyle.height);
 
         setWidth(requiredWidth);
-        setHeight(requiredHeight);
+        if (!isNaN(requiredHeight)) {
+            setHeight(requiredHeight);
+        }
     };
 
     const _onHandleClickOutsideOfFiltersBox = (e) => {
@@ -396,7 +398,6 @@ export default function ServerBrowser() {
                                     <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
                                 </svg>
                             </a>
-                            <ServerFilters visible={filtersVisible} onClose={_onCloseFilters} />
                         </div>
                         <div
                             className={'header-action compact' + (compactView ? ' active' : '')}
@@ -486,6 +487,7 @@ export default function ServerBrowser() {
                     {serversList}
                 </div>
             </div>
+            <ServerFilters visible={filtersVisible} onClose={_onCloseFilters} />
         </div>
     );
 }
