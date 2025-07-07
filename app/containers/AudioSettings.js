@@ -77,15 +77,15 @@ export default function AudioSettings() {
             <h2>Audio settings</h2>
             <div className="settings-row">
                 <h3>Master volume</h3>
-                <Slider onChange={setMasterVolume} value={settings.currentSettings.masterVolume * 100} />
+                <Slider onChange={setMasterVolume} value={settings.currentSettings.masterVolume} />
             </div>
             <div className="settings-row">
                 <h3>Music volume</h3>
-                <Slider onChange={setMusicVolume} value={settings.currentSettings.musicVolume * 100} />
+                <Slider onChange={setMusicVolume} value={settings.currentSettings.musicVolume} />
             </div>
             <div className="settings-row">
                 <h3>Dialogue volume</h3>
-                <Slider onChange={setDialogueVolume} value={settings.currentSettings.dialogueVolume * 100} />
+                <Slider onChange={setDialogueVolume} value={settings.currentSettings.dialogueVolume} />
             </div>
             <h2>VoIP settings</h2>
             <div className="settings-row">
@@ -100,7 +100,7 @@ export default function AudioSettings() {
             </div>
             <div className="settings-row">
                 <h3>Voice activation threshold</h3>
-                <VoipSlider onChange={onVoipCutoffVolumeChange} volume={voip.volume} value={voip.cutoffVolume * 100} />
+                <VoipSlider onChange={onVoipCutoffVolumeChange} volume={voip.volume} value={voip.cutoffVolume} />
             </div>
             <div className="settings-row">
                 <h3>Volume</h3>
