@@ -3,7 +3,7 @@
     align-self: center;
     .left-content {
         margin-top: 2.222222222222222vh; // 24px
-        display: inline-block;
+        display: flex;
         width: 70%;
         position: relative;
         padding-right: 1.851851851851852vh; // 20px
@@ -11,13 +11,13 @@
 
     .right-content {
         margin-top: 2.222222222222222vh; // 24px
-        display: inline-block;
+        display: flex;
         width: 29.99%;
         padding-left: 1.851851851851852vh; // 20px
     }
 
     .column {
-        display: inline-block;
+        display: flex;
         overflow: hidden;
         &.column-1 {
             display: flex;
@@ -161,7 +161,7 @@
         padding: 0.9259259259259259vh 0; // 10px 0
         font-size: 1.851851851851852vh; // 20px
         font-weight: 300;
-        display: inline-block;
+        display: flex;
         opacity: 0.75;
         -webkit-user-select: none;
         user-select: none;
@@ -541,7 +541,8 @@
 
     .left, .right {
         flex: 1 1 50%;
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
     }
 
     .left {
@@ -569,7 +570,6 @@
         font-family: 'Blinker';
         font-size: 1.481481481481481vh; // 16px
         border: 0.1574074074074074vh solid rgba(255, 255, 255, 0.4);
-        line-height: 3.703703703703704vh;
     }
 
     .filter {
@@ -581,7 +581,7 @@
     display: flex;
     label {
         width: 46%;
-        display: inline-block;
+        display: flex;
 
         &:first-child {
             margin-right: 8%;
@@ -590,7 +590,7 @@
 
     input[type="text"] {
         width: 65%;
-        display: inline-block;
+        display: flex;
         margin-left: 1.481481481481481vh; // 16px
     }
 }
@@ -607,14 +607,10 @@
 .frequency-filters {
     display: flex;
     label {
-        display: inline-block;
+        display: flex;
         width: 33.3333%;
         font-weight: 300;
         font-size: 1.481481481481481vh; // 16px
-
-        // input {
-        //     vertical-align: middle;
-        // }
 
         &:last-child {
             width: 33.3332%;

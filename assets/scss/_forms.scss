@@ -69,7 +69,7 @@ form {
 
     .rc-slider {
         width: 84%;
-        display: inline-block;
+        display: flex;
     }
 
     &.voip-slider {
@@ -142,20 +142,19 @@ input[type="checkbox"] {
     background: rgba(0, 0, 0, 0.4);
     margin: 0;
     margin-right: 0.9259259259259259vh; // 10px
-    // display: inline-block;
-    vertical-align: middle;
+    // display: flex;
     position: relative;
 
-    &:checked:after {
-        content: "";
-        height: 0.3703703703703704vh; // 4px
-        width: 0.8333333333333333vh; // 9px
-        border-left: 0.2777777777777778vh solid #e14d43; // 3px
-        border-bottom: 0.2777777777777778vh solid #e14d43; // 3px
-        position: absolute;
-        top: 0.2777777777777778vh; // 3px
-        left: 0.1851851851851852vh; // 2px
+    // &:checked:after {
+    //     content: "";
+    //     height: 0.3703703703703704vh; // 4px
+    //     width: 0.8333333333333333vh; // 9px
+    //     border-left: 0.2777777777777778vh solid #e14d43; // 3px
+    //     border-bottom: 0.2777777777777778vh solid #e14d43; // 3px
+    //     position: absolute;
+    //     top: 0.2777777777777778vh; // 3px
+    //     left: 0.1851851851851852vh; // 2px
 
-        transform: rotate(-45deg);
-    }
+    //     transform: rotate(-45deg);
+    // }
 }

@@ -9,7 +9,6 @@
     display: flex;
     width: 24.07407407407407vh; // 260px
     height: 40.74074074074074vh; // 440px
-    vertical-align: top;
     background: rgba(0, 0, 0, 0.6);
     position: relative;
     justify-content: center;
@@ -35,7 +34,7 @@
     }
 
     &:after {
-        display: inline-block;
+        display: flex;
         position: absolute;
         left: 0;
         bottom: 0;

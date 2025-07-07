@@ -16,7 +16,7 @@
     margin-left: 2vmin;
     margin-right: 2vmin;
     &:after {
-        display: inline-block;
+        display: flex;
         position: absolute;
         left: 0;
         bottom: 0;

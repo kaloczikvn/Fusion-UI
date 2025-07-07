@@ -15,14 +15,14 @@
 }
 
 #console-input {
+    display: flex;
     background: #333;
     height: 4.62962962962963vh; // 50px
     line-height: 4.537037037037037vh; // 49px;
     font-family: 'JetBrains Mono';
 
     label {
-        display: inline-block;
-        vertical-align: top;
+        display: flex;
         width: 20.83333333333333vh; // 225px
         padding-left: 1.851851851851852vh; // 20px
         font-size: 1.851851851851852vh; // 20px
@@ -34,8 +34,6 @@
         border: 0;
         padding: 0;
         margin: 0;
-        vertical-align: top;
-        width: calc(100% - 22.68518518518519vh); // 100% - 245px
         background: #333;
         font-family: 'JetBrains Mono';
         font-weight: 400;
@@ -62,6 +60,7 @@
         font-family: 'JetBrains Mono';
 
         li {
+            display: flex;
             padding: 0.7407407407407407vh 1.296296296296296vh; // 8px 14px
             margin: 0.3703703703703704vh; // 4px
             color: #aaa;
@@ -91,6 +90,7 @@
 }
 
 .console-row {
+    display: flex;
     padding: 0 1.296296296296296vh; // 0 14px
     font-weight: 400;
     font-size: 1.666666666666667vh; // 18px
@@ -98,7 +98,7 @@
     font-family: 'JetBrains Mono';
     -webkit-user-select: text;
     user-select: text;
-
+    margin-bottom: 1px;
     strong {
         color: #da857b;
         font-weight: 600;

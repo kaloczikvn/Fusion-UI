@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PerfectScrollbar from 'perfect-scrollbar';
+// import PerfectScrollbar from 'perfect-scrollbar';
 
 import * as ServerFetchStatus from '../constants/ServerFetchStatus';
 import * as ServerConnectStatus from '../constants/ServerConnectStatus';
@@ -122,15 +122,15 @@ export default function ServerBrowser() {
     };
 
     const _onServerList = (ref) => {
-        if (ref === null) {
-            scrollbarRef.current = null;
-            return;
-        }
+        // if (ref === null) {
+        //     scrollbarRef.current = null;
+        //     return;
+        // }
 
-        scrollbarRef.current = new PerfectScrollbar(ref, {
-            wheelSpeed: 3,
-            suppressScrollX: true,
-        });
+        // scrollbarRef.current = new PerfectScrollbar(ref, {
+        //     wheelSpeed: 3,
+        //     suppressScrollX: true,
+        // });
     };
 
     const _hasFilterApplied = () => {

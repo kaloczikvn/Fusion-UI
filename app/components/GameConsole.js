@@ -1,13 +1,26 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
+Element.prototype.scrollTo = function(val) {
+    if (typeof val === 'object') {
+        this.scrollTop = val.top || 0;
+        this.scrollLeft = val.left || 0;
+    } else {
+        this.scrollTop = val || 0;
+    }
+    
+    // Immediate repaint without setTimeout
+    this.style.transform = 'translateZ(0)';
+    this.offsetHeight; // Force layout immediately
+    this.style.transform = ''; // Remove immediately
+    this.dispatchEvent(new Event('scroll')); // Trigger scroll event
+};
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 import * as ActionTypes from '../constants/ActionTypes'
 import { Virtuoso } from 'react-virtuoso';
 
-class GameConsole extends Component
-{
-    constructor(props)
-    {
+class GameConsole extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -22,19 +35,16 @@ class GameConsole extends Component
         this.maxTextLength = 0;
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         this._onResize();
         window.addEventListener('resize', this._onResize);
     }
 
-    componentWillUnmount()
-    {
+    componentWillUnmount() {
         window.removeEventListener('resize', this._onResize);
     }
 
-    _onResize = () =>
-    {
+    _onResize = () => {
         this.setState({
             windowWidth: window.innerWidth,
             windowHeight: window.innerHeight,
@@ -43,19 +53,16 @@ class GameConsole extends Component
         this.scrollBottom();
     };
 
-    scrollBottom()
-    {
+    scrollBottom() {
         window.requestAnimationFrame(this._doScroll);
     }
 
-    _doScroll = () =>
-    {
+    _doScroll = () => {
         if (this.refs.output && this.maxTextLength > 0)
             this.refs.output.scrollToIndex(this.maxTextLength - 1);
     };
 
-    componentDidUpdate(prevProps, prevState)
-    {
+    componentDidUpdate(prevProps, prevState) {
         if (prevProps.console.consoleUpdater !== this.props.console.consoleUpdater)
             this.scrollBottom();
 
@@ -63,18 +70,15 @@ class GameConsole extends Component
             setTimeout(() => this.scrollBottom(), 50);
 
         // Bring input to focus.
-        if (this.props.console.active)
-        {
-            setTimeout(() =>
-            {
+        if (this.props.console.active) {
+            setTimeout(() => {
                 if (this.props.console.active)
                     this.refs.con.focus();
             }, 50);
         }
     }
 
-    componentWillReceiveProps(nextProps)
-    {
+    componentWillReceiveProps(nextProps) {
         if ((this.props.console.active && !nextProps.console.active) || (!this.props.console.active && nextProps.console.active)) {
             this.setState({
                 suggestion: -1,
@@ -96,16 +100,13 @@ class GameConsole extends Component
         }
     }
 
-    render()
-    {
+    render() {
         let suggestions = null;
 
-        if (this.props.console.suggestions.length > 0)
-        {
+        if (this.props.console.suggestions.length > 0) {
             let suggestionList = [];
 
-            for (let i = 0; i < this.props.console.suggestions.length; ++i)
-            {
+            for (let i = 0; i < this.props.console.suggestions.length; ++i) {
                 suggestionList.push(
                     <li className={this.state.suggestion === i ? 'active' : ''}
                         key={i}
@@ -158,11 +159,11 @@ class GameConsole extends Component
                 <div id="console-input">
                     <label onClick={this.onLabelClick.bind(this)}>{this.props.base.productCode} {this.props.base.version} [{this.props.base.build}] ></label>
                     <input type="text"
-                           ref="con"
-                           autoFocus={true}
-                           autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
-                           onInput={this.onInput.bind(this)}
-                           onKeyDown={this.onKeyDown.bind(this)}
+                        ref="con"
+                        autoFocus={true}
+                        autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
+                        onInput={this.onInput.bind(this)}
+                        onKeyDown={this.onKeyDown.bind(this)}
                     />
                 </div>
                 <div id="console-body-container">
@@ -173,8 +174,7 @@ class GameConsole extends Component
         );
     }
 
-    _renderRow = (index) =>
-    {
+    _renderRow = (index) => {
         if (index === 0 || index - 1 >= this.props.console.text.length) {
             return (
                 <div className="padding-row" />
@@ -186,33 +186,28 @@ class GameConsole extends Component
         )
     };
 
-    onLabelClick(e)
-    {
+    onLabelClick(e) {
         if (e)
             e.preventDefault();
 
         this.refs.con.focus();
     }
 
-    onInput(e)
-    {
+    onInput(e) {
         // Reset the previous counter when we type.
         this.previous = -1;
         WebUI.Call('ConSuggest', this.refs.con.value);
     }
 
-    onKeyDown(e)
-    {
+    onKeyDown(e) {
         if (!e)
             return;
 
         // Down arrow
-        if (e.keyCode === 40)
-        {
+        if (e.keyCode === 40) {
             e.preventDefault();
 
-            if (this.props.console.suggestions.length === 0)
-            {
+            if (this.props.console.suggestions.length === 0) {
                 if (this.props.console.previousCommands.length === 0)
                     return;
 
@@ -252,19 +247,17 @@ class GameConsole extends Component
         }
 
         // Up arrow
-        if (e.keyCode === 38)
-        {
+        if (e.keyCode === 38) {
             e.preventDefault();
 
-            if (this.props.console.suggestions.length === 0)
-            {
+            if (this.props.console.suggestions.length === 0) {
                 if (this.props.console.previousCommands.length === 0)
                     return;
 
                 // If we have no suggestions we're in "previous command mode".
                 let previous = this.previous;
 
-                if (this.previous <= -1 )
+                if (this.previous <= -1)
                     previous = this.props.console.previousCommands.length - 1;
                 else
                     previous -= 1;
@@ -287,7 +280,7 @@ class GameConsole extends Component
             }
 
             // Otherwise we're browsing suggestions.
-            if (this.state.suggestion <= -1 )
+            if (this.state.suggestion <= -1)
                 this.setState({ suggestion: this.props.console.suggestions.length - 1 });
             else
                 this.setState({ suggestion: this.state.suggestion - 1 });
@@ -296,8 +289,7 @@ class GameConsole extends Component
         }
 
         // Enter
-        if (e.keyCode === 13)
-        {
+        if (e.keyCode === 13) {
             e.preventDefault();
 
             // Reset previous counter.
@@ -354,8 +346,7 @@ class GameConsole extends Component
         }
 
         // Escape
-        if (e.keyCode === 27)
-        {
+        if (e.keyCode === 27) {
             this.refs.con.value = '';
             this.props.closeConsole();
 
@@ -363,8 +354,7 @@ class GameConsole extends Component
         }
 
         // Tab
-        if (e.keyCode === 9)
-        {
+        if (e.keyCode === 9) {
             e.preventDefault();
 
             if (this.state.suggestion >= 0) {
@@ -376,13 +366,11 @@ class GameConsole extends Component
         }
     }
 
-    onHoverSuggestion(i)
-    {
+    onHoverSuggestion(i) {
         this.setState({ suggestion: i });
     }
 
-    onSuggestionClick(i, e)
-    {
+    onSuggestionClick(i, e) {
         if (e)
             e.preventDefault();
 

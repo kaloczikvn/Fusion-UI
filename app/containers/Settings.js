@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Select from 'react-select';
-import PerfectScrollbar from 'perfect-scrollbar';
+// import PerfectScrollbar from 'perfect-scrollbar';
 
 import * as ActionTypes from '../constants/ActionTypes';
 import ApplySettingsPopup from '../popups/ApplySettingsPopup';
@@ -120,21 +120,21 @@ export default function Settings() {
             return;
         }
 
-        modListScrollbarRef.current = new PerfectScrollbar(ref, {
-            wheelSpeed: 1,
-        });
+        // modListScrollbarRef.current = new PerfectScrollbar(ref, {
+        //     wheelSpeed: 1,
+        // });
     };
 
     const _onModSettings = (ref) => {
-        if (ref === null) {
-            modSettingsScrollbarRef.current = null;
-            return;
-        }
+        // if (ref === null) {
+        //     modSettingsScrollbarRef.current = null;
+        //     return;
+        // }
 
-        modSettingsScrollbarRef.current = new PerfectScrollbar(ref, {
-            wheelSpeed: 3,
-            suppressScrollX: true,
-        });
+        // modSettingsScrollbarRef.current = new PerfectScrollbar(ref, {
+        //     wheelSpeed: 3,
+        //     suppressScrollX: true,
+        // });
     };
 
     const _isTabActive = (tab) => {

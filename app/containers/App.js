@@ -169,7 +169,7 @@ export default function App(props) {
     return (
         <div id="ui-app">
             {mainContainers}
-            {/* <GameConsole/> TODO: Re-enable later */}
+                <GameConsole/>
             {globalNotice}
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as ActionTypes from '../constants/ActionTypes';
 import * as LoginStatus from '../constants/LoginStatus';
+import CustomCheckbox from '../components/inputs/Checkbox';
 
 import LoginPopup from '../popups/LoginPopup';
 
@@ -15,7 +16,8 @@ export default function Login() {
 
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
-    const rememberRef = useRef(null);
+    const [rememberMe, setRememberMe] = useState(false); // Use state instead of ref
+
 
     const enableBlur = () => {
         dispatch({ type: ActionTypes.SET_BLUR, blur: true });
@@ -41,6 +43,7 @@ export default function Login() {
         setCapsLock(capsLockState);
     };
 
+
     const onForgotPassword = (e) => {
         if (e) e.preventDefault();
 
@@ -52,10 +55,7 @@ export default function Login() {
 
         onSetLogin();
         setPopup(<LoginPopup />);
-
-        // TODO: Fix checkbox...
-        // WebUI.Call('Login', usernameRef.current.value, passwordRef.current.value, rememberRef.current.checked);
-        WebUI.Call('Login', usernameRef.current.value, passwordRef.current.value, true);
+        WebUI.Call('Login', usernameRef.current.value, passwordRef.current.value, rememberMe);
     };
 
     const onSignUp = (e) => {
@@ -126,9 +126,11 @@ export default function Login() {
                 </a>
                 <div className="login-actions">
                     <div className="left-actions">
-                        <label>
-                            Remember Me <input type="checkbox" name="remember" value="yes" ref={rememberRef} />
-                        </label>
+                        <CustomCheckbox
+                            label="Remember Me"
+                            checked={rememberMe}
+                            onChange={setRememberMe}
+                        />
                     </div>
                     <div className="right-actions">
                         <a href="#" onClick={onForgotPassword}>

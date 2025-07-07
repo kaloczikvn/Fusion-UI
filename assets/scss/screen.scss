@@ -105,7 +105,7 @@ a {
     border: 0.2777777777777778vh solid rgba(255, 255, 255, 0.2); // 3px
     border-top-color: #fff;
     animation: spin 1s infinite linear;
-    display: inline-block;
+    display: flex;
 
     &--double {
         border-style: double;
