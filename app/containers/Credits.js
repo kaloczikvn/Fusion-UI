@@ -24,7 +24,7 @@ export default function Credits() {
         <div className="credits content-wrapper">
             <div className="credits-frame">
                 <div className="credits-container">
-                    <h1>{this.props.base.productName}</h1>
+                    <h1>{base.productName}</h1>
 
                     <h2>Development Team</h2>
                     <h3>Orfeas "NoFaTe" Zafeiris</h3>
