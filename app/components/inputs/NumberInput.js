@@ -1,42 +1,30 @@
 import React, { Component } from "react";
-import Slider from "rc-slider";
+import Slider from "../Slider";
 
 import "./NumberInput.scss";
 
-export default class NumberInput extends Component
-{
-    render()
-    {
+export default class NumberInput extends Component {
+    render() {
         let className = 'slider-input';
 
         if (this.props.className)
             className += ' ' + this.props.className;
 
         return (
-            <div className={className}>
-                <input
-                    className="slider-value"
-                    type="text"
-                    onChange={this._onInputChange}
-                    value={this.props.value}
-                />
-                <Slider
-                    onChange={this._onSliderChange}
-                    value={this.props.value}
-                    min={this.props.min}
-                    max={this.props.max}
-                />
-            </div>
+            <Slider
+                onChange={this._onSliderChange}
+                value={this.props.value}
+                min={this.props.min}
+                max={this.props.max}
+            />
         );
     }
 
-    _onSliderChange = (value) =>
-    {
+    _onSliderChange = (value) => {
         this.props.onChange(value);
     };
 
-    _onInputChange = (e) =>
-    {
+    _onInputChange = (e) => {
         // Make sure to only allow numbers.
         if (e.target.value.length > 0 && !e.target.value.match(/[0-9]+/g)) {
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
