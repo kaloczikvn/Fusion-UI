@@ -40,11 +40,18 @@
         &.column-4 {
             width: 12.99%;
             text-align: center;
+            flex-direction: column;
+            align-items: center;
+            justify-self: center;
+            h3 {
+                font-size: 1.75vmin !important;
+            }
         }
 
         &.column-5 {
             width: 6.99%;
             text-align: center;
+            justify-content: center;
         }
     }
 }
@@ -430,6 +437,11 @@
         &.lag {
             color: #e14d43;
             opacity: 1.0;
+        }
+
+        &.freq {
+            display: flex;
+            align-items: center;
         }
     }
 }
