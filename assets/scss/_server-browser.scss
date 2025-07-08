@@ -565,6 +565,7 @@
         font-family: 'Blinker';
         font-size: 1.481481481481481vh; // 16px
         border: 0.1574074074074074vh solid rgba(255, 255, 255, 0.4);
+        padding-top: 0.8vh !important;
     }
 
     .filter {
@@ -591,6 +592,7 @@
         width: 65%;
         display: flex;
         margin-left: 1.481481481481481vh; // 16px
+        padding-top: 0.8vh !important;
     }
 }
 
