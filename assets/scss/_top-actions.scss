@@ -1,6 +1,5 @@
 .top-actions {
     display: flex;
-    list-style-type: none;
     // margin: 0;
     // padding: 0;
     // position: absolute;
@@ -19,7 +18,6 @@
     }
 
     li {
-        float: left;
         margin-right: 2.314814814814815vh; // 25px;
 
         a {

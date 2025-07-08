@@ -37,10 +37,9 @@
         background: #333;
         font-family: 'JetBrains Mono';
         font-weight: 400;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
         font-size: 1.851851851851852vh; // 20px
         color: #fff;
+        flex: 1;
     }
 }
 
@@ -79,7 +78,6 @@
     .console-output {
         background: #444;
         margin-top: 0.462962962962963vh; // 5px
-        -webkit-user-select: text;
         user-select: text;
     }
 }
@@ -96,26 +94,22 @@
     font-size: 1.666666666666667vh; // 18px
     line-height: 1.759259259259259vh; // 19px
     font-family: 'JetBrains Mono';
-    -webkit-user-select: text;
     user-select: text;
     margin-bottom: 1px;
     strong {
         color: #da857b;
         font-weight: 600;
-        -webkit-user-select: text;
         user-select: text;
     }
 
     em {
         color: #61d2ff;
-        -webkit-user-select: text;
         user-select: text;
     }
 
     u {
         color: #ffe835;
         text-decoration: none;
-        -webkit-user-select: text;
         user-select: text;
     }
 }

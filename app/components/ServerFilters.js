@@ -291,12 +291,12 @@ class ServerFilters extends Component {
                         <div className="filter">
                             <h3 style={{marginBottom: '5px'}}>Visibility filters</h3>
                             <CustomCheckbox
-                                label="Hide FULL SERVERS"
+                                label="HIDE FULL SERVERS"
                                 checked={this.state.hideFull}
                                 onChange={this._onChangeHideFull}
                             />
                             <CustomCheckbox
-                                label="Hide EMPTY SERVERS"
+                                label="HIDE EMPTY SERVERS"
                                 checked={this.state.hideEmpty}
                                 onChange={this._onChangeHideEmpty}
                             />

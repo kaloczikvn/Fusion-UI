@@ -91,7 +91,6 @@
     .mod-list {
       border-right: 0.15741vh solid rgba(255, 255, 255, 0.4);
       position: relative;
-      height: calc(100% - 4.472222vh);
       margin-top: 4.472222vh;
       width: 20%;
       &.no-mod {
@@ -117,7 +116,6 @@
           img {
             height: 1.8518518518518518518518518518519vh;
             margin-right: 0.9259259259259259vh;
-            object-fit: contain;
           }
         }
 
@@ -139,7 +137,6 @@
 
     .mod-settings {
       position: relative;
-      max-height: calc(100% - 4vh);
       padding: 2vh;
       width: 80%;
       &.no-mod {

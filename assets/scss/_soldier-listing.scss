@@ -14,7 +14,6 @@
     justify-content: center;
     align-items: center;
     margin: 0 2.314814814814815vh; // 0 25px
-    -webkit-user-select: none;
     user-select: none;
 
     &:before {
@@ -116,7 +115,6 @@
         background: rgba(0, 0, 0, 0.6) !important;
         transform: translate(0%, 0%);
         backdrop-filter: blur(1.851851851851852vh); // 20px
-        will-change: top;
         &:before {
             display: none;
         }

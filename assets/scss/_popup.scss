@@ -46,7 +46,6 @@
     right: 0;
     transform: translate(0%, 0%);
     backdrop-filter: blur(20px);
-    will-change: top;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }

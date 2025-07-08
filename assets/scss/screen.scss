@@ -10,7 +10,6 @@ $color-accent-red: #e14d43;
 $color-error-red: rgba(255, 0, 0, 0.8);
 
 * {
-    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -23,10 +22,7 @@ body, html {
     color: #fff;
     font-family: 'Blinker';
     font-weight: 500;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
     overflow: hidden;
-    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -73,7 +69,6 @@ a {
     &.has-blur {
         transform: translate(0%, 0%);
         backdrop-filter: blur(20px);
-        will-change: top;
         background: rgba(0, 0, 0, 0.5);
     }
 }
@@ -94,7 +89,6 @@ a {
     font-size: 1.481481481481481vh; // 16px
     font-weight: 300;
     opacity: 0.3;
-    -webkit-user-select: none;
     user-select: none;
 }
 
