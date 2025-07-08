@@ -27,12 +27,11 @@ export default function UpdateIndicator() {
 
     const renderUpdating = () => {
         const percentage = Math.round(update.percentage * 100.0);
-
         if (percentage >= 99.9) {
             return (
                 <div className="update-indicator">
                     <div className="update-indicator-container">
-                        <span>Finishing Update</span>
+                        <span style={{paddingLeft: '1vmin'}}>Finishing Update</span>
                         <ProgressIndicator percentage={100} />
                     </div>
                 </div>
@@ -42,7 +41,7 @@ export default function UpdateIndicator() {
         return (
             <div className="update-indicator">
                 <div className="update-indicator-container">
-                    <span>Updating {percentage}%</span>
+                    <span style={{paddingLeft: '1vmin'}}>Updating {percentage}%</span>
                     <ProgressIndicator percentage={update.percentage * 100.0} />
                 </div>
             </div>

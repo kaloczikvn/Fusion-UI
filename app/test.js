@@ -823,6 +823,19 @@ setInterval(() => {
     DispatchAction(actions.SET_VOIP_DATA, { data: { volume: Math.random() } })
 }, 100);
 
+// let payload = {
+//     totalFiles: 1000,
+//     doneFiles: 0,
+//     total: 1000,
+//     downloaded: 0
+// };
+
+// setInterval(()=>{
+//     payload.doneFiles += 10;
+//     payload.downloaded += 10;
+//     DispatchAction(actions.CHANGE_UPDATE_PROGRESS, payload);
+// }, 1000);
+
 /*setTimeout(() => {
     DispatchAction(actions.CHANGE_INGAME, { ingame: true });
     DispatchAction(actions.SHOW_SETTINGS_POPUP, { show: true });

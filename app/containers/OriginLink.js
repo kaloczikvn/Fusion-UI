@@ -104,12 +104,12 @@ export default function OriginLink() {
         <div id="origin-link-page">
             <div className="middle-container">
                 <h1>Ownership Verification</h1>
-                <p>
-                    In order to use {base.productName} we will first need to verify your game ownership through your EA
+                <h2 style={{fontSize: '1.8vmin', padding:'0 20vw', marginTop: '2vmin'}}>
+                    In order to use venice unleashed we will first need to verify your game ownership through your EA
                     account. Please launch the EA Desktop app or the Origin client on your computer and log in with your
                     account. This is a one-time process and will link your EA account with your Venice Unleashed
                     account.
-                </p>
+                </h2>
                 <div className="status-container">
                     <img src="/assets/img/common/origin.svg" className={spinning ? 'spinning' : ''} />
                     <h2>{originState}</h2>

@@ -95,7 +95,11 @@ export default function SoldierEntry({ actions, name, className, deleteCallback,
         );
 
     return (
-        <div className={entryClassName} onClick={onMainClick}>
+        <div className={entryClassName} onClick={onMainClick}
+            style={{
+                background: 'linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,1.0) 100%), url("/assets/img/soldier-bg.png") no-repeat center center',
+                backgroundSize: '100% 100%'
+            }}>
             <div className="actions">{actionElements}</div>
             <div className="bottom-content">
                 <h2>{title}</h2>

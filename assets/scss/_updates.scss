@@ -6,10 +6,13 @@
   height: 3.322222222222222vh; // 35.88px;
   transition: all 350ms ease-in-out;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .update-indicator-container {
-  width: 14.81481481481481vh; // 160px;
+  width: 18vh; // 160px;
   height: 3.322222222222222vh; // 35.88px;
   position: absolute;
   padding: 0.3703703703703704vh; // 4px;
@@ -31,7 +34,7 @@
 }
 
 .update-indicator:hover {
-  width: 15vh; // 162px;
+  width: 18vh; // 162px;
   border-color: rgba(255, 255, 255, 0.4);
 }
 
