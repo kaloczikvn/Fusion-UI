@@ -11,7 +11,7 @@ export default function ProgressIndicator({ percentage, completed, error }) {
     if (error) pathStroke = 'rgb(255, 95, 95)';
     
     const size = 20;
-    const strokeWidth = 3;
+    const strokeWidth = 2;
     const radius = (size - strokeWidth) / 2;
     const center = size / 2;
     
@@ -32,7 +32,7 @@ export default function ProgressIndicator({ percentage, completed, error }) {
     return (
         <div className="progress-indicator">
             <svg className='CircularProgressbar'
-                style={{ transform: 'rotate(0deg) translate(2px, 2px)' }}
+                style={{ transform: 'rotateZ(0deg) translate(0.4vh, 0.3vh)' }}
             >
                 <circle
                     cx={center}
