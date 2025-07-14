@@ -205,7 +205,7 @@ class ConnectingServerPopup extends Component
                 <div className="center-notice">
                     <div className="notice-content">
                         <h1>Downloading</h1>
-                        <p>Downloading file {currFile} of {totalFiles}. Download progress: {progress}%</p>
+                        <p>{`Downloading file ${currFile} of ${totalFiles}. Download progress: ${progress}%`}</p>
                         <LoadingIndicator/>
                     </div>
                 </div>
