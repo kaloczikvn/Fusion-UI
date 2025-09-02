@@ -157,7 +157,7 @@
   display: flex;
   margin-bottom: 1.851851851851852vh; // 20px
   align-items: center;
-
+  padding: 0 2vmin;
   h3 {
     flex: 33%;
   }
@@ -197,5 +197,8 @@
 
   .settings {
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
