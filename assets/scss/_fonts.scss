@@ -1,34 +1,48 @@
 @font-face {
+    font-family: 'Open Sans';
+    src: url('/assets/fonts/OpenSans-VariableFont.ttf') format('truetype-variations');
+    font-style: normal;
+    font-weight: 1 999;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/assets/fonts/OpenSans-Italic-VariableFont.ttf') format('truetype-variations');
+    font-style: italic;
+    font-weight: 1 999;
+}
+
+@font-face {
     font-family: 'Blinker';
     font-style: normal;
     font-weight: 300;
-    src: url('https://cdn.bf3reality.com/assets/fonts/blinker-semilight-webfont.otf');
+    src: url('/assets/fonts/blinker-semilight-webfont.otf');
 }
 
 @font-face {
     font-family: 'Blinker';
     font-style: normal;
     font-weight: 400;
-    src: url('https://cdn.bf3reality.com/assets/fonts/blinker-regular-webfont.otf');
+    src: url('/assets/fonts/blinker-regular-webfont.otf');
 }
 
 @font-face {
     font-family: 'Blinker';
     font-style: normal;
     font-weight: 500;
-    src: url('https://cdn.bf3reality.com/assets/fonts/blinker-semibold-webfont.otf');
+    src: url('/assets/fonts/blinker-semibold-webfont.otf');
 }
 
 @font-face {
     font-family: 'Blinker';
     font-style: normal;
     font-weight: 600;
-    src: url('https://cdn.bf3reality.com/assets/fonts/blinker-bold-webfont.otf');
+    src: url('/assets/fonts/blinker-bold-webfont.otf');
 }
 
 @font-face {
     font-family: 'Material Icons';
-    src: url('https://cdn.bf3reality.com/assets/fonts/MaterialIcons-Regular.ttf');
+    src: url('/assets/fonts/MaterialIcons-Regular.ttf');
     font-style: normal;
     font-weight: 400;
 }
@@ -37,21 +51,21 @@
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 400;
-    src: url('https://cdn.bf3reality.com/assets/fonts/JetBrainsMono-Regular.otf')
+    src: url('/assets/fonts/JetBrainsMono-Regular.otf');
 }
 
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 600;
-    src: url('https://cdn.bf3reality.com/assets/fonts/JetBrainsMono-Bold.otf')
+    src: url('/assets/fonts/JetBrainsMono-Bold.otf');
 }
 
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;  /* Preferred icon size */
+    font-size: 24px; /* Preferred icon size */
     display: flex;
     line-height: 1;
     text-transform: none;
