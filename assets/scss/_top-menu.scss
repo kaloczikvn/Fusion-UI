@@ -9,17 +9,17 @@
     text-align: center;
     position: relative;
     z-index: 2;
-    user-select: none;
     justify-content: center;
     // align-items: center;
 
-    .left-items, .right-items {
+    .left-items,
+    .right-items {
         display: flex;
         //border-bottom: 0.1574074074074074vh solid rgba(255, 255, 255, 0.3);
         padding: 4.62962962962963vh 0 1.66666666666667vh; // 50px 0 18px
 
         li {
-            display:flex;
+            display: flex;
             text-align: center;
             width: 15.74074074074074vh; // 170px
 
