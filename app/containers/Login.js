@@ -5,6 +5,7 @@ import * as LoginStatus from '../constants/LoginStatus';
 import CustomCheckbox from '../components/inputs/Checkbox';
 
 import LoginPopup from '../popups/LoginPopup';
+import { onEnterKeyDown } from '../utils/handlers';
 
 export default function Login() {
     const [capsLock, setCapsLock] = useState(false);
@@ -17,7 +18,6 @@ export default function Login() {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
     const [rememberMe, setRememberMe] = useState(false); // Use state instead of ref
-
 
     const enableBlur = () => {
         dispatch({ type: ActionTypes.SET_BLUR, blur: true });
@@ -42,7 +42,6 @@ export default function Login() {
         const capsLockState = e.getModifierState('CapsLock');
         setCapsLock(capsLockState);
     };
-
 
     const onForgotPassword = (e) => {
         if (e) e.preventDefault();
@@ -77,6 +76,8 @@ export default function Login() {
             setPopup(<LoginPopup />);
 
             WebUI.Call('TokenLogin', user.loginToken.token);
+        } else {
+            usernameRef.current.focus();
         }
 
         return () => {
@@ -92,13 +93,13 @@ export default function Login() {
 
     return (
         <div id="login-page">
-            <form onSubmit={onSubmit}>
+            <form onKeyDown={(e) => onEnterKeyDown(e, onSubmit)}>
                 <img src="/assets/img/logo.svg" />
 
                 <label htmlFor="username">Username</label>
                 <br />
                 <div className="field-container">
-                    <input type="text" ref={usernameRef} key="username" id="username" />
+                    <input type="text" ref={usernameRef} key="username" id="username" tabIndex={1} />
                     <br />
                 </div>
                 <label htmlFor="password">Password</label>
@@ -109,6 +110,7 @@ export default function Login() {
                         ref={passwordRef}
                         key="password"
                         id="password"
+                        tabIndex={2}
                         onKeyDown={onUpdateCapsLock}
                         onKeyUp={onUpdateCapsLock}
                         onMouseDown={onUpdateCapsLock}
@@ -126,11 +128,7 @@ export default function Login() {
                 </a>
                 <div className="login-actions">
                     <div className="left-actions">
-                        <CustomCheckbox
-                            label="Remember Me"
-                            checked={rememberMe}
-                            onChange={setRememberMe}
-                        />
+                        <CustomCheckbox label="Remember Me" checked={rememberMe} onChange={setRememberMe} />
                     </div>
                     <div className="right-actions">
                         <a href="#" onClick={onForgotPassword}>

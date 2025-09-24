@@ -37,13 +37,13 @@ export default function App(props) {
         });
 
         // Preload all resources.
-        preloaderInstance.add('/assets/fonts/blinker-bold-webfont.woff2');
-        preloaderInstance.add('/assets/fonts/blinker-regular-webfont.woff2');
-        preloaderInstance.add('/assets/fonts/blinker-semibold-webfont.woff2');
-        preloaderInstance.add('/assets/fonts/blinker-semilight-webfont.woff2');
+        preloaderInstance.add('/assets/fonts/blinker-bold-webfont.otf');
+        preloaderInstance.add('/assets/fonts/blinker-regular-webfont.otf');
+        preloaderInstance.add('/assets/fonts/blinker-semibold-webfont.otf');
+        preloaderInstance.add('/assets/fonts/blinker-semilight-webfont.otf');
 
-        preloaderInstance.add('/assets/fonts/JetBrainsMono-Bold.woff2');
-        preloaderInstance.add('/assets/fonts/JetBrainsMono-Regular.woff2');
+        preloaderInstance.add('/assets/fonts/JetBrainsMono-Bold.otf');
+        preloaderInstance.add('/assets/fonts/JetBrainsMono-Regular.otf');
 
         preloaderInstance.add('/assets/fonts/MaterialIcons-Regular.ttf');
 
@@ -169,7 +169,7 @@ export default function App(props) {
     return (
         <div id="ui-app">
             {mainContainers}
-                <GameConsole/>
+            <GameConsole />
             {globalNotice}
         </div>
     );
