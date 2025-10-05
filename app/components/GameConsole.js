@@ -144,14 +144,20 @@ class GameConsole extends Component {
         );
 
         const style = {
-            display: 'block',
+            display: 'none',
             visibility: 'hidden',
             pointerEvents: 'none',
         };
 
         if (this.props.console.active) {
+            style.display = 'block';
             style.visibility = 'visible';
             style.pointerEvents = 'auto';
+        }
+        else{
+            style.display = 'none';
+            style.visibility = 'hidden';
+            style.pointerEvents = 'none';
         }
 
         return (
