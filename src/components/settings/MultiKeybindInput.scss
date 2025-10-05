@@ -1,0 +1,11 @@
+.multi-keybind-input {
+    position: relative;
+    width: 100%;
+
+    .keybind-reset {
+        position: absolute;
+        right: 10rem;
+        top: 5rem;
+        margin: 0;
+    }
+}

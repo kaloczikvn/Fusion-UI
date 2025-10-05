@@ -1,0 +1,164 @@
+@import 'reset';
+@import 'fonts';
+@import 'animations';
+@import 'forms';
+
+$color-console-red: #da857b;
+$color-console-blue: #61d2ff;
+$color-console-yellow: #ffe835;
+$color-accent-red: #e14d43;
+$color-error-red: rgba(255, 0, 0, 0.8);
+
+* {
+    user-select: none;
+}
+
+/*
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+*/
+
+html {
+    font-size: 10px;
+}
+
+body,
+html {
+    color: #fff;
+    font-family: 'Blinker';
+    font-weight: 500;
+    overflow: hidden;
+    user-select: none;
+}
+
+body,
+html,
+#root {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    //animation: background-animation 30s ease-in-out infinite;
+}
+
+svg {
+    fill: #fff;
+}
+
+a {
+    color: #fff;
+}
+
+#ui-app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#animated-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background: #000;
+}
+
+#app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    backdrop-filter: blur(0);
+    background: rgba(0, 0, 0, 0);
+    overflow: hidden;
+
+    &.has-blur {
+        transform: translate(0%, 0%);
+        backdrop-filter: blur(20rem);
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.content-wrapper {
+    display: block;
+    height: 100%;
+    width: 133.333333333333vh;
+    z-index: 1;
+    overflow: hidden;
+    align-self: center;
+}
+
+#build-info {
+    position: absolute;
+    bottom: 4.62962962962963vh; // 50px
+    right: 4.62962962962963vh; // 50px
+    font-size: 1.481481481481481vh; // 16px
+    font-weight: 300;
+    opacity: 0.3;
+    user-select: none;
+}
+
+.loading-indicator {
+    border-radius: 51%;
+    width: 40rem;
+    height: 40rem;
+    border: 3rem solid rgba(255, 255, 255, 0.2);
+    border-top-color: #fff;
+    animation: spin 1s infinite linear;
+
+    /*
+    &--double {
+        border-style: double;
+        border-width: 3rem;
+    }
+    */
+}
+
+#watermark {
+    position: absolute;
+    top: 40rem;
+    right: 40rem;
+    z-index: 99999;
+    opacity: 0.3;
+    text-align: center;
+    filter: brightness(6);
+
+    img {
+        height: 50rem; // 50px
+    }
+
+    span {
+        margin-top: 6rem; // 6px
+        font-weight: 300;
+        font-size: 20rem; // 20px
+    }
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@import 'buttons';
+@import 'progress';
+@import 'popup';
+@import 'login';
+@import 'updates';
+@import 'origin-link';
+@import 'top-menu';
+@import 'main-menu';
+@import 'server-browser';
+@import 'soldier-listing';
+@import 'credits';
+@import 'top-actions';
+@import 'game-console';
+@import 'settings';
+@import 'global-notice';

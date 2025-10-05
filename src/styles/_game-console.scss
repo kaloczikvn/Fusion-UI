@@ -1,0 +1,123 @@
+#game-console-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 2.777777777777778vh; // 30px
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 999999;
+    background: rgba(0, 0, 0, 0.5);
+    font-family: 'JetBrains Mono';
+}
+
+#console-input {
+    background: #333;
+    height: 50rem; // 50px
+    line-height: 49rem; // 49px;
+    font-family: 'JetBrains Mono';
+    display: flex;
+    align-items: center;
+
+    label {
+        width: 225rem; // 225px
+        padding-left: 20rem; // 20px
+        font-size: 20rem; // 20px
+        color: #999;
+    }
+
+    .console-input-wrapper {
+        height: 50px;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    input {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background: #333;
+        font-family: 'JetBrains Mono';
+        font-weight: 400;
+        color: #fff;
+        font-size: 20rem;
+        line-height: 20rem;
+        height: 20rem;
+        flex-grow: 1;
+    }
+}
+
+#console-body-container {
+    position: relative;
+    width: 100%;
+    font-family: 'JetBrains Mono';
+
+    #console-suggestions {
+        position: absolute;
+        left: 14.44444444444444vh; // 156px
+        top: 0.1851851851851852vh; // 2px
+        background: #555;
+        box-shadow: 0 0 0.1851851851851852vh rgba(0, 0, 0, 1);
+        font-size: 20rem; // 20px
+        font-family: 'JetBrains Mono';
+
+        li {
+            padding: 0.7407407407407407vh 1.296296296296296vh; // 8px 14px
+            margin: 0.3703703703703704vh; // 4px
+            color: #aaa;
+            display: flex;
+
+            &.active {
+                background: #666;
+                color: #ddd;
+            }
+
+            strong {
+                color: #da857b;
+            }
+        }
+    }
+
+    .console-output {
+        background: #444;
+        margin-top: 5rem; // 5px
+        user-select: text;
+    }
+}
+
+.padding-row {
+    width: 100%;
+    height: 14rem; // 14px
+    display: flex;
+}
+
+.console-row {
+    padding: 0 14rem; // 0 14px
+    font-weight: 400;
+    font-size: 18rem; // 18px
+    line-height: 19rem; // 19px
+    font-family: 'JetBrains Mono';
+    user-select: text;
+    display: flex;
+
+    strong {
+        color: #da857b;
+        font-weight: 600;
+        user-select: text;
+    }
+
+    em {
+        color: #61d2ff;
+        user-select: text;
+    }
+
+    u {
+        color: #ffe835;
+        text-decoration: none;
+        user-select: text;
+    }
+}

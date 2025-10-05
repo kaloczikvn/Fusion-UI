@@ -1,0 +1,43 @@
+.bool-input {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 50rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 10rem;
+
+    .off,
+    .on {
+        text-transform: uppercase;
+        font-size: 20rem;
+        font-weight: 500;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .off {
+        color: #000;
+        background: #fff;
+        margin-right: 5rem;
+    }
+
+    .on {
+        color: #fff;
+        background: transparent;
+        margin-left: 5rem;
+    }
+
+    &.checked {
+        .off {
+            color: #fff;
+            background: transparent;
+        }
+
+        .on {
+            color: #000;
+            background: #fff;
+        }
+    }
+}
