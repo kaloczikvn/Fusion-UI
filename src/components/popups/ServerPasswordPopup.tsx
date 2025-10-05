@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
 
 import { ActionTypes } from '../../constants/ActionTypes';
+import { onEnterKeyDown } from '../../utils/handlers';
 import Input from '../form/Input';
 
 interface IProps {
@@ -54,7 +55,7 @@ const ServerPasswordPopup: React.FC<IProps> = ({ server, onJoin }) => {
         <div className="center-notice">
             <div className="notice-content">
                 <h1>Enter Server Password</h1>
-                <form onSubmit={onSubmit}>
+                <form onKeyDown={(e) => onEnterKeyDown(e, onSubmit)}>
                     <div className="label-wrapper">
                         <label htmlFor="password">Server Password</label>
                         <br />

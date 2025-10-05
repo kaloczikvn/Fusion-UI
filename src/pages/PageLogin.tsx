@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { type KeyboardEvent, type MouseEvent, useEffect, useRef, useState } from 'react';
 import { MdOutlineReport } from 'react-icons/md';
 
 import Checkbox from '../components/form/Checkbox';
@@ -7,6 +7,7 @@ import LoginPopup from '../components/popups/LoginPopup';
 import { ActionTypes } from '../constants/ActionTypes';
 import { LoginStatus } from '../constants/LoginStatus';
 import useUserStore from '../stores/useUserStore';
+import { onEnterKeyDown } from '../utils/handlers';
 
 const PageLogin: React.FC = () => {
     const loginData = useUserStore((s) => s.loginData);
@@ -58,7 +59,7 @@ const PageLogin: React.FC = () => {
         window.WebUI.Call('Forgot');
     };
 
-    const onSubmit = (e: any) => {
+    const onSubmit = (e: KeyboardEvent | MouseEvent) => {
         e.preventDefault();
 
         onSetLogin();
@@ -88,6 +89,8 @@ const PageLogin: React.FC = () => {
             setPopup(<LoginPopup />);
 
             window.WebUI.Call('TokenLogin', loginToken.token);
+        } else {
+            usernameRef.current?.focus();
         }
 
         return () => {
@@ -97,7 +100,7 @@ const PageLogin: React.FC = () => {
 
     return (
         <div id="login-page">
-            <form onSubmit={onSubmit}>
+            <form onKeyDown={(e) => onEnterKeyDown(e, onSubmit)}>
                 <img src="/assets/img/logo.svg" />
 
                 <label htmlFor="username">Username</label>
@@ -108,6 +111,7 @@ const PageLogin: React.FC = () => {
                         id="username"
                         placeholder="Enter username"
                         value={username}
+                        tabIndex={1}
                         onChange={(e) => setUsername(e.target.value)}
                         onKeyDown={onUpdateCapsLock}
                         onKeyUp={onUpdateCapsLock}
@@ -127,6 +131,7 @@ const PageLogin: React.FC = () => {
                         key="password"
                         id="password"
                         placeholder="Enter pasword"
+                        tabIndex={2}
                         onKeyDown={onUpdateCapsLock}
                         onKeyUp={onUpdateCapsLock}
                         onMouseDown={(e) => {

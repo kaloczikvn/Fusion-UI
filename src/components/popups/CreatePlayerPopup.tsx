@@ -4,6 +4,7 @@ import { ActionTypes } from '../../constants/ActionTypes';
 import { PlayerCreateStatus } from '../../constants/PlayerCreateStatus';
 import useBaseStore from '../../stores/useBaseStore';
 import useUserStore from '../../stores/useUserStore';
+import { onEnterKeyDown } from '../../utils/handlers';
 import Input from '../form/Input';
 import LoadingIndicator from '../global/LoadingIndicator';
 
@@ -136,7 +137,7 @@ const CreatePlayerPopup: React.FC = () => {
         <div className="center-notice">
             <div className="notice-content">
                 <h1>Create new Soldier</h1>
-                <form onSubmit={onSubmit}>
+                <form onKeyDown={(e) => onEnterKeyDown(e, onSubmit)}>
                     <label htmlFor="name">Soldier name</label>
                     <div style={{ margin: '4rem 0 16rem' }}>
                         <Input
