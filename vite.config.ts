@@ -1,4 +1,4 @@
-import { vext } from '@vextjs/vite-plugin';
+import vext from '@vextjs/vite-plugin';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
