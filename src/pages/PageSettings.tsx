@@ -327,7 +327,7 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
             <>
                 {Object.entries(modSettings[selectedMod])
                     .sort((settingA: any, settingB: any) =>
-                        settingA[1].displayName.localeCompare(settingB[1].displayName)
+                        settingA[1].displayName.localeCompare(settingB[1].displayName),
                     )
                     .map((setting: any) => (
                         <div className="settings-row" key={setting[0]}>
@@ -453,11 +453,6 @@ const PageSettings: React.FC<IProps> = ({ popup }) => {
             </div>
             <div className="tab-inner">{renderActiveTab()}</div>
             <div className="settings-buttons">
-                {popup ? (
-                    <a href="#" className="btn border-btn" onClick={() => hideSettingsPopup()}>
-                        Close
-                    </a>
-                ) : null}
                 <a href="#" className="btn border-btn" onClick={_onResetSettings}>
                     Reset settings
                 </a>

@@ -1,13 +1,12 @@
 // Polyfills
 import 'whatwg-fetch';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-// TODO: Fix issues with this polyfill
-// import './polyfills/coherent-tabindex-polyfill';
 import './utils/globals/GlobalNotice';
 import './utils/globals/PrintState';
 import './utils/globals/WebUI';
 import './utils/globals/GlobalVars';
 import './utils/globals/DispatchAction';
+import './utils/globals/GetServerConnectionPopup';
 import './styles/screen.scss';
 
 import { createRoot } from 'react-dom/client';

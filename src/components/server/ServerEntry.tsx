@@ -172,13 +172,11 @@ const ServerEntry: React.FC<IProps> = ({
         (server.variables.banner.startsWith('http://') || server.variables.banner.startsWith('https://')) &&
         server.variables.banner.endsWith('.jpg')
     ) {
-        /*
         style.background =
             'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 35%,rgba(0,0,0,0.3) 65%,rgba(0,0,0,0.8) 100%), url(' +
             server.variables.banner +
             ') no-repeat top center';
         style.backgroundSize = '100% auto';
-        */
     } else if (hasMapImage(server.variables.mapname)) {
         style.background =
             "linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 35%,rgba(0,0,0,0.3) 65%,rgba(0,0,0,0.8) 100%), url('/assets/img/maps/" +
@@ -210,7 +208,7 @@ const ServerEntry: React.FC<IProps> = ({
         serverIcons.push(
             <span className="server-icon locked" key="locked">
                 <MdLock />
-            </span>
+            </span>,
         );
     }
 
@@ -229,7 +227,7 @@ const ServerEntry: React.FC<IProps> = ({
             serverIcons.push(
                 <span className="server-icon lag" key="lag">
                     <MdHourglassDisabled />
-                </span>
+                </span>,
             );
 
             if (compatibilityNotice === null) {
@@ -245,14 +243,14 @@ const ServerEntry: React.FC<IProps> = ({
             <span className="server-icon freq" key="freq">
                 <MdSpeed />
                 <span>60Hz</span>
-            </span>
+            </span>,
         );
     } else if (server.variables.frequency === 'high120') {
         if (fps !== null && fps <= 132) {
             serverIcons.push(
                 <span className="server-icon lag" key="lag">
                     <MdHourglassDisabled />
-                </span>
+                </span>,
             );
 
             if (compatibilityNotice === null) {
@@ -269,14 +267,14 @@ const ServerEntry: React.FC<IProps> = ({
             <span className="server-icon freq" key="freq">
                 <MdSpeed />
                 <span>120Hz</span>
-            </span>
+            </span>,
         );
     } else {
         if (fps !== null && fps <= 33) {
             serverIcons.push(
                 <span className="server-icon lag" key="lag">
                     <MdHourglassDisabled />
-                </span>
+                </span>,
             );
 
             if (compatibilityNotice === null) {
@@ -309,14 +307,14 @@ const ServerEntry: React.FC<IProps> = ({
             <h3 key="tags" className="tags">
                 <MdSell />
                 {tags}
-            </h3>
+            </h3>,
         );
 
         onlyTags = serverIcons.length === 0;
         serverIcons.unshift(
             <span className="server-icon compact-tags" key="tags">
                 <MdSell />
-            </span>
+            </span>,
         );
     }
 
@@ -334,7 +332,7 @@ const ServerEntry: React.FC<IProps> = ({
         <h1 key="info">
             <div className={serverIconsClass}>{serverIcons}</div>
             {server.name.length > 50 ? server.name.substring(0, 50) + '..' : server.name}
-        </h1>
+        </h1>,
     );
 
     return (

@@ -19,6 +19,7 @@ const PageLogin: React.FC = () => {
     const [remember, setRemember] = useState<boolean>(false);
 
     const usernameRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
 
     const enableBlur = () => {
         window.DispatchAction(ActionTypes.SET_BLUR, {
@@ -44,11 +45,7 @@ const PageLogin: React.FC = () => {
         });
     };
 
-    const onUpdateCapsLock = (e: any) => {
-        if (e.key === 'Enter') {
-            onSubmit(e);
-        }
-
+    const onUpdateCapsLock = (e: KeyboardEvent<HTMLInputElement>) => {
         const capsLockState = e.getModifierState('CapsLock');
         setIsCapsLockOn(capsLockState);
     };
@@ -100,7 +97,7 @@ const PageLogin: React.FC = () => {
 
     return (
         <div id="login-page">
-            <form onKeyDown={(e) => onEnterKeyDown(e, onSubmit)}>
+            <form>
                 <img src="/assets/img/logo.svg" />
 
                 <label htmlFor="username">Username</label>
@@ -111,10 +108,18 @@ const PageLogin: React.FC = () => {
                         id="username"
                         placeholder="Enter username"
                         value={username}
-                        tabIndex={1}
                         onChange={(e) => setUsername(e.target.value)}
-                        onKeyDown={onUpdateCapsLock}
-                        onKeyUp={onUpdateCapsLock}
+                        onKeyDown={(e) => {
+                            onUpdateCapsLock(e);
+                            onEnterKeyDown(e, onSubmit);
+
+                            if (e.key === 'Tab') {
+                                passwordRef.current?.focus();
+                            }
+                        }}
+                        onKeyUp={(e) => {
+                            onUpdateCapsLock(e);
+                        }}
                         onMouseDown={(e) => {
                             setIsCapsLockOn(e.getModifierState('CapsLock'));
                         }}
@@ -131,12 +136,17 @@ const PageLogin: React.FC = () => {
                         key="password"
                         id="password"
                         placeholder="Enter pasword"
-                        tabIndex={2}
-                        onKeyDown={onUpdateCapsLock}
-                        onKeyUp={onUpdateCapsLock}
+                        onKeyDown={(e) => {
+                            onUpdateCapsLock(e);
+                            onEnterKeyDown(e, onSubmit);
+                        }}
+                        onKeyUp={(e) => {
+                            onUpdateCapsLock(e);
+                        }}
                         onMouseDown={(e) => {
                             setIsCapsLockOn(e.getModifierState('CapsLock'));
                         }}
+                        ref={passwordRef}
                     />
                 </div>
                 {isCapsLockOn ? (
