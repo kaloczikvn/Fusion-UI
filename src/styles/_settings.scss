@@ -1,0 +1,186 @@
+.settings {
+    .tabs {
+        display: flex;
+        font-size: 16rem;
+        line-height: 26rem;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        border-bottom: 2rem solid rgba(255, 255, 255, 0.2);
+        padding-left: 20rem;
+
+        .tab {
+            opacity: 0.25;
+            padding: 5rem 15rem;
+
+            &:hover {
+                opacity: 0.5;
+            }
+
+            &.active {
+                opacity: 1;
+                border-bottom: 2rem solid #e14d43;
+                margin-bottom: -2rem;
+            }
+        }
+    }
+
+    .tab-inner {
+        position: relative;
+        border-left: 2rem solid rgba(255, 255, 255, 0.2);
+        border-bottom: 2rem solid rgba(255, 255, 255, 0.2);
+        border-right: 2rem solid rgba(255, 255, 255, 0.2);
+        height: 70%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20rem);
+    }
+
+    h2 {
+        text-transform: uppercase;
+        font-size: 20rem;
+        margin-bottom: 8rem;
+        line-height: 20rem;
+        text-shadow: 0 0 4rem rgba(0, 0, 0, 1);
+        color: #e14d43;
+    }
+
+    h3 {
+        text-transform: uppercase;
+        font-size: 18rem;
+        line-height: 26rem;
+        font-weight: 400;
+        text-shadow: 0 0 4rem rgba(0, 0, 0, 1);
+    }
+
+    hr {
+        border-bottom: 2rem solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        margin: 8rem 0 16rem;
+    }
+
+    .mod-settings-container {
+        position: relative;
+        display: flex;
+        height: 100%;
+
+        .mod-search-bar {
+            left: 0;
+            right: 80%;
+            top: 0;
+            position: absolute;
+        }
+
+        .mod-list {
+            position: relative;
+            margin-top: 50rem;
+            width: 20%;
+
+            &.no-mod {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mod {
+                border-bottom: 2rem solid rgba(255, 255, 255, 0.2);
+                padding: 0 10rem;
+                height: 50rem;
+                display: flex;
+                align-items: center;
+
+                span {
+                    opacity: 0.4;
+                    text-transform: uppercase;
+                    font-size: 16rem;
+                    line-height: 16rem;
+                }
+
+                &.active {
+                    background: rgba(255, 255, 255, 0.1);
+
+                    span {
+                        opacity: 1;
+                    }
+                }
+
+                &:hover {
+                    span {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .mod-settings {
+            border-left: 2rem solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            padding: 20rem;
+            width: 80%;
+
+            &.no-mod {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+
+    .general-settings {
+        padding: 2vh;
+    }
+}
+
+.settings-row {
+    display: flex;
+    margin-bottom: 10rem;
+    align-items: center;
+
+    h3 {
+        flex: 33%;
+    }
+
+    .slider-input {
+        display: flex;
+        align-items: center;
+
+        .input-wrapper {
+            margin-right: 20rem;
+            max-width: 60rem;
+            min-width: 60rem;
+
+            input {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.settings-row > div {
+    flex: 33%;
+}
+
+.settings-row > input {
+    flex: 33%;
+}
+
+.settings-row > label {
+    flex: 33%;
+}
+
+.settings-buttons {
+    text-align: right;
+    display: flex;
+    align-self: flex-end;
+    margin-top: 4vmin;
+}
+
+#settings-popup {
+    height: 100%;
+
+    .settings {
+        margin: 0 auto;
+    }
+}

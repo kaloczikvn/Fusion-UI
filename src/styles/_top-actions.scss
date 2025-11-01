@@ -1,0 +1,32 @@
+.top-actions {
+    display: flex;
+    padding: 46rem 0;
+    z-index: 998;
+
+    &.left {
+        padding-left: 50rem;
+    }
+
+    &.right {
+        padding-right: 50rem;
+    }
+
+    li {
+        margin-right: 25rem;
+
+        a {
+            opacity: 0.3;
+            transition: opacity 150ms ease-in-out;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            svg {
+                width: 34rem;
+                height: 34rem;
+                color: #fff;
+            }
+        }
+    }
+}

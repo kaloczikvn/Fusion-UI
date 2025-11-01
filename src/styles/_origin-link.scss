@@ -1,0 +1,60 @@
+#origin-link-page {
+    &.content-wrapper {
+        padding-top: 150rem;
+        max-width: 500rem;
+    }
+
+    h1,
+    h2,
+    p {
+        text-decoration: none;
+        text-transform: uppercase;
+        opacity: 0.5;
+        font-weight: 300;
+        font-size: 18rem;
+    }
+
+    h1 {
+        margin-bottom: 8rem;
+        font-size: 22rem;
+        opacity: 0.7;
+    }
+
+    p {
+        opacity: 0.5;
+        text-transform: none;
+        text-align: justify;
+        font-size: 18rem;
+        line-height: 26rem;
+    }
+
+    h2 {
+        opacity: 1;
+        font-size: 25rem; // 25px
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    img {
+        width: 60rem; // 60px
+        height: 60rem;
+    }
+
+    .status-container {
+        margin-top: 50rem; // 50px;
+        text-align: center;
+
+        &-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40rem;
+        }
+    }
+
+    a {
+        margin-left: 0;
+        margin-top: 20rem; // 20px;
+    }
+}
