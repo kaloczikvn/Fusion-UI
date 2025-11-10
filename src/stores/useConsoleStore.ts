@@ -12,7 +12,7 @@ interface State {
     actions: { [key: number]: (action: any) => void };
 }
 
-const CONSOLE_TEXT_LIMIT = 100;
+const CONSOLE_TEXT_LIMIT = 1_000;
 
 const useConsoleStore = create<State>((set) => ({
     text: [],
